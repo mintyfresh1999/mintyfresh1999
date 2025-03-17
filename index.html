@@ -299,6 +299,7 @@
     .section-item .item-icon.icon-update { background-color: #8e8e93; }
     .section-item .item-icon.icon-storage { background-color: #8e8e93; }
     .section-item .item-icon.icon-hotspot { background-color: #34c759; }
+    .section-item .item-icon.icon-airplane { background-color: #ff9500; }
 
     /* BRIGHTNESS SLIDER */
     .brightness-controls { display: flex; align-items: center; gap: 10px; }
@@ -392,7 +393,7 @@
         </div>
         <div class="profile-info">
           <div class="profile-name">John Appleseed</div>
-          <div class="profile-email">Apple ID, iCloud, Media &amp; Purchases</div>
+          <div class="profile-email">Apple ID, iCloud, Media & Purchases</div>
         </div>
         <div class="profile-chevron">›</div>
       </div>
@@ -504,7 +505,7 @@
 
       <!-- Display & Appearance -->
       <div class="section-header" data-collapse-target="#displayAppearance">
-        Display &amp; Appearance
+        Display & Appearance
         <span class="collapse-arrow">⯆</span>
       </div>
       <div class="section" id="displayAppearance">
@@ -553,6 +554,17 @@
         <span class="collapse-arrow">⯆</span>
       </div>
       <div class="section" id="connectionsSection">
+        <div class="section-item" tabindex="0" data-setting-id="airplane">
+          <div class="left-content">
+            <div class="item-icon icon-airplane">
+              <img src="airplane.png" alt="Airplane Mode icon" />
+            </div>
+            <div class="item-name">Airplane Mode</div>
+          </div>
+          <div class="right-content">
+            <div class="toggle-switch" role="switch" aria-checked="false"></div>
+          </div>
+        </div>
         <div class="section-item" tabindex="0" data-setting-id="cellular">
           <div class="left-content">
             <div class="item-icon icon-cellular">
@@ -939,18 +951,25 @@
           const settingItem = settingsItems.find(i => i.id === settingId);
           if (settingItem) {
             settingItem.toggleState = isActive;
-            if (isActive !== wasActive) {
-              showToast(`${settingItem.name} ${isActive ? 'On' : 'Off'}`);
-            }
-            // if turning on wifi/bluetooth/cellular/hotspot while airplane is on => turn airplane off
-            if (["wifi","bluetooth","cellular","hotspot"].includes(settingId) && isActive) {
-              const airplaneItem = settingsItems.find(a => a.id === "airplane");
-              if (airplaneItem && airplaneItem.toggleState) {
+            if (settingId === "airplane") {
+              if (isActive) {
+                turnOnAirplane();
+              } else {
                 turnOffAirplane();
               }
-            }
-            if (["wifi","bluetooth","cellular"].includes(settingId)) {
-              syncToggleState(settingId, isActive);
+            } else {
+              if (isActive !== wasActive) {
+                showToast(`${settingItem.name} ${isActive ? 'On' : 'Off'}`);
+              }
+              if (["wifi","bluetooth","cellular","hotspot"].includes(settingId) && isActive) {
+                const airplaneItem = settingsItems.find(a => a.id === "airplane");
+                if (airplaneItem && airplaneItem.toggleState) {
+                  turnOffAirplane();
+                }
+              }
+              if (["wifi","bluetooth","cellular"].includes(settingId)) {
+                syncToggleState(settingId, isActive);
+              }
             }
           }
           if (navigator.vibrate) {
@@ -1052,21 +1071,28 @@
           const settingData = settingsItems.find(i => i.id === settingId);
           if (settingData) {
             settingData.toggleState = isActive;
-            if (isActive !== wasActive) {
-              showToast(`${settingData.name} ${isActive ? 'On' : 'Off'}`);
-            }
-            // if user turns on wifi/bluetooth/cellular/hotspot while airplane is on => turn airplane off
-            if (["wifi","bluetooth","cellular","hotspot"].includes(settingId) && isActive) {
-              const airplaneItem = settingsItems.find(a => a.id === "airplane");
-              if (airplaneItem && airplaneItem.toggleState) {
+            if (settingId === "airplane") {
+              if (isActive) {
+                turnOnAirplane();
+              } else {
                 turnOffAirplane();
               }
-            }
-            if (["wifi","bluetooth","cellular"].includes(settingId)) {
-              syncToggleState(settingId, isActive);
-            }
-            if (settingId === "low-power-mode") {
-              updateBatteryStatusIcon();
+            } else {
+              if (isActive !== wasActive) {
+                showToast(`${settingData.name} ${isActive ? 'On' : 'Off'}`);
+              }
+              if (["wifi","bluetooth","cellular","hotspot"].includes(settingId) && isActive) {
+                const airplaneItem = settingsItems.find(a => a.id === "airplane");
+                if (airplaneItem && airplaneItem.toggleState) {
+                  turnOffAirplane();
+                }
+              }
+              if (["wifi","bluetooth","cellular"].includes(settingId)) {
+                syncToggleState(settingId, isActive);
+              }
+              if (settingId === "low-power-mode") {
+                updateBatteryStatusIcon();
+              }
             }
           }
         }
