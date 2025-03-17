@@ -403,6 +403,7 @@
     <div class="content-container">
       <!-- PINNED CONNECTIVITY SECTION -->
       <div class="pinned-section">
+        <div class="section-header" style="cursor: default; margin-bottom: 5px;">PINNED</div>
         <div class="connectivity-controls">
           <!-- Wi-Fi button -->
           <div class="connectivity-button" aria-label="Wi-Fi" role="button" data-setting-id="wifi">
@@ -1155,6 +1156,19 @@
           showToast(`${settingItem.name} Off`);
         }
       });
+      const airplaneToggle = document.querySelector('.section-item[data-setting-id="airplane"] .toggle-switch');
+      if (airplaneToggle) {
+        airplaneToggle.classList.add('active');
+        airplaneToggle.setAttribute('aria-checked', 'true');
+      }
+      const airplanePinned = document.querySelector('.connectivity-button[data-setting-id="airplane"] .connectivity-icon');
+      if (airplanePinned) {
+        airplanePinned.classList.add('active');
+      }
+      const airplaneItem = settingsItems.find(s => s.id === "airplane");
+      if (airplaneItem) {
+        airplaneItem.toggleState = true;
+      }
       showAirplaneStatus(true);
       showToast("Airplane On");
     }
