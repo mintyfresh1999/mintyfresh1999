@@ -219,10 +219,10 @@
     /* PINNED SECTION */
     .pinned-section {
       position: sticky; top: 0; z-index: 2;
-      margin: 0 16px 15px; background-color: #f2f2f7;
+      margin-bottom: 15px; background-color: #f2f2f7;
     }
     .connectivity-controls {
-      display: flex; justify-content: space-around; gap: 8px;
+      margin: 0 16px; display: flex; justify-content: space-around; gap: 8px;
     }
     .connectivity-button {
       display: flex; flex-direction: column; align-items: center;
@@ -994,7 +994,7 @@
           if (mainSlider && settingId === 'display-brightness') {
             mainSlider.value = newVal;
           }
-          updatePageBrightness(newVal);
+          updateScreenBrightness(newVal);
         });
       });
 
@@ -1256,10 +1256,12 @@
       }
     }
 
-    /* Update page brightness */
-    function updatePageBrightness(value) {
-      const brightness = value / 100; // Convert 0-100 to 0-1
-      document.body.style.filter = `brightness(${brightness})`;
+    /* Update screen brightness for prototype */
+    function updateScreenBrightness(value) {
+      const container = document.querySelector('.container');
+      // Map 0-100 to 0.5-1.0 brightness range (50% to 100%)
+      const brightness = 0.5 + (value / 100) * 0.5;
+      container.style.filter = `brightness(${brightness})`;
     }
 
     // search bar events
@@ -1331,10 +1333,10 @@
         const mainSlider = document.querySelector('.main-brightness-range');
         if (mainSlider) {
           mainSlider.value = brightnessItem.brightnessValue || 50;
-          updatePageBrightness(mainSlider.value); // Set initial brightness
+          updateScreenBrightness(mainSlider.value); // Set initial brightness
           mainSlider.addEventListener('input', function() {
             brightnessItem.brightnessValue = parseInt(this.value, 10);
-            updatePageBrightness(this.value);
+            updateScreenBrightness(this.value);
           });
         }
       }
