@@ -186,7 +186,7 @@
 
     /* PROFILE SECTION */
     .profile-section {
-      margin: 0 16px 16px; border-radius: 10px; background-color: #fff;
+      margin: 0 16px 15px; border-radius: 10px; background-color: #fff;
       border: 1px solid #c7c7cc; overflow: hidden; position: relative;
       box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     }
@@ -219,7 +219,7 @@
     /* PINNED SECTION */
     .pinned-section {
       position: sticky; top: 0; z-index: 2;
-      margin: 0 16px 16px; padding: 12px 0; background-color: #f2f2f7;
+      margin: 0 16px 15px; background-color: #f2f2f7;
     }
     .connectivity-controls {
       display: flex; justify-content: space-around; gap: 8px;
@@ -403,7 +403,7 @@
     <div class="content-container">
       <!-- PINNED CONNECTIVITY SECTION -->
       <div class="pinned-section">
-        <div class="section-header" style="cursor: default; margin-bottom: 5px;">PINNED</div>
+        <div class="section-header" style="cursor: default;">PINNED</div>
         <div class="connectivity-controls">
           <!-- Wi-Fi button -->
           <div class="connectivity-button" aria-label="Wi-Fi" role="button" data-setting-id="wifi">
@@ -983,7 +983,6 @@
       document.querySelectorAll('.search-results .search-brightness-range').forEach(slider => {
         slider.addEventListener('input', function(e) {
           e.stopPropagation();
-          // find item by searching the parent .search-result-item
           const parentItem = this.closest('.search-result-item');
           if (!parentItem) return;
           const settingId = parentItem.getAttribute('data-setting-id');
@@ -991,11 +990,11 @@
           if (!settingItem) return;
           const newVal = parseInt(this.value, 10);
           settingItem.brightnessValue = newVal;
-          // update main UI slider
           const mainSlider = document.querySelector('.main-brightness-range');
           if (mainSlider && settingId === 'display-brightness') {
             mainSlider.value = newVal;
           }
+          updatePageBrightness(newVal);
         });
       });
 
@@ -1257,6 +1256,12 @@
       }
     }
 
+    /* Update page brightness */
+    function updatePageBrightness(value) {
+      const brightness = value / 100; // Convert 0-100 to 0-1
+      document.body.style.filter = `brightness(${brightness})`;
+    }
+
     // search bar events
     searchInput.addEventListener('input', toggleClearIcon);
     clearIcon.addEventListener('click', () => {
@@ -1326,8 +1331,10 @@
         const mainSlider = document.querySelector('.main-brightness-range');
         if (mainSlider) {
           mainSlider.value = brightnessItem.brightnessValue || 50;
+          updatePageBrightness(mainSlider.value); // Set initial brightness
           mainSlider.addEventListener('input', function() {
             brightnessItem.brightnessValue = parseInt(this.value, 10);
+            updatePageBrightness(this.value);
           });
         }
       }
