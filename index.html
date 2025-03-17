@@ -52,7 +52,7 @@
       background-color: transparent;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.3s ease;
+      transition: opacity 0.2s ease;
       z-index: 20;
     }
     .search-overlay.active {
@@ -128,7 +128,7 @@
       background-color: white; border-radius: 10px;
       box-shadow: 0 4px 16px rgba(0,0,0,0.2);
       max-height: 0; overflow: hidden;
-      transition: max-height 0.3s ease;
+      transition: max-height 0.2s ease;
       z-index: 31;
     }
     .search-results.active {
@@ -258,7 +258,7 @@
       display: flex; align-items: center; justify-content: space-between;
     }
     .collapse-arrow {
-      transition: transform 0.3s ease; font-size: 14px; margin-left: 8px;
+      transition: transform 0.15s ease; font-size: 14px; margin-left: 8px;
     }
     .collapsed-arrow { transform: rotate(-90deg); }
     .section {
@@ -267,7 +267,7 @@
       position: relative; box-shadow: 0 1px 3px rgba(0,0,0,0.1);
       max-height: 500px; /* Large enough to fit content */
       overflow: hidden;
-      transition: max-height 0.3s ease-in-out; /* Fluid animation */
+      transition: max-height 0.15s ease-in-out; /* Fluid animation */
     }
     .section.collapsed {
       max-height: 0; /* Collapsed state */
@@ -430,7 +430,7 @@
       <!-- Collapsible: "Recently Used" -->
       <div class="section-header" data-collapse-target="#recentlyUsed">
         Recently Used
-        <span class="collapse-arrow">⯆</span>
+        <span class="collapse-arrow">▼</span>
       </div>
       <div class="section" id="recentlyUsed">
         <!-- Display Brightness Row with Slider -->
@@ -498,7 +498,7 @@
       <!-- Display & Appearance -->
       <div class="section-header" data-collapse-target="#displayAppearance">
         Display & Appearance
-        <span class="collapse-arrow">⯆</span>
+        <span class="collapse-arrow">▼</span>
       </div>
       <div class="section" id="displayAppearance">
         <div class="section-item" tabindex="0" data-setting-id="auto-dim">
@@ -543,7 +543,7 @@
       <!-- Connections -->
       <div class="section-header" data-collapse-target="#connectionsSection">
         Connections
-        <span class="collapse-arrow">⯆</span>
+        <span class="collapse-arrow">▼</span>
       </div>
       <div class="section" id="connectionsSection">
         <div class="section-item" tabindex="0" data-setting-id="airplane">
@@ -597,7 +597,7 @@
       <!-- System -->
       <div class="section-header" data-collapse-target="#systemSection">
         System
-        <span class="collapse-arrow">⯆</span>
+        <span class="collapse-arrow">▼</span>
       </div>
       <div class="section" id="systemSection">
         <div class="section-item" tabindex="0" data-setting-id="software-update">
