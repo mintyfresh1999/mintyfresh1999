@@ -258,17 +258,22 @@
       display: flex; align-items: center; justify-content: space-between;
     }
     .collapse-arrow {
-      transition: transform 0.2s ease; font-size: 14px; margin-left: 8px;
+      transition: transform 0.3s ease; font-size: 14px; margin-left: 8px;
     }
     .collapsed-arrow { transform: rotate(-90deg); }
-    .collapsed { display: none; }
-
-    /* SECTIONS & LIST ITEMS */
     .section {
       margin: 0 16px; border-radius: 10px; background-color: #fff;
-      border: 1px solid #c7c7cc; margin-bottom: 15px; overflow: hidden;
+      border: 1px solid #c7c7cc; margin-bottom: 15px;
       position: relative; box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      max-height: 500px; /* Large enough to fit content */
+      overflow: hidden;
+      transition: max-height 0.3s ease-in-out; /* Fluid animation */
     }
+    .section.collapsed {
+      max-height: 0; /* Collapsed state */
+    }
+
+    /* SECTIONS & LIST ITEMS */
     .section-item {
       display: flex; justify-content: space-between; align-items: center;
       padding: 12px 16px; border-bottom: 1px solid #c7c7cc;
@@ -333,20 +338,6 @@
     .toggle-switch.active::before {
       transform: translateX(20px);
     }
-
-    /* TOAST NOTIFICATIONS */
-    .toast-container {
-      position: fixed; bottom: 20%; left: 50%; transform: translateX(-50%);
-      z-index: 9999; pointer-events: none;
-    }
-    .toast {
-      background-color: rgba(0, 0, 0, 0.75); color: white;
-      padding: 12px 16px; border-radius: 8px;
-      margin-bottom: 10px; font-size: 15px; opacity: 0;
-      transition: opacity 0.3s ease; pointer-events: none;
-      text-align: center; max-width: 250px;
-    }
-    .toast.show { opacity: 1; }
 
     /* HOME INDICATOR */
     .home-indicator {
@@ -650,9 +641,6 @@
       </div>
     </div>
 
-    <!-- TOAST CONTAINER -->
-    <div id="toast-container" class="toast-container"></div>
-
     <!-- HOME INDICATOR -->
     <div class="home-indicator"></div>
   </div>
@@ -669,7 +657,7 @@
         keywords: ["display", "brightness", "screen", "light", "dim"],
         iconClass: "icon-display",
         hasToggle: false,
-        brightnessValue: 100 // Changed to start at 100%
+        brightnessValue: 100
       },
       {
         id: "wifi",
@@ -749,7 +737,7 @@
         keywords: ["text", "size", "font", "accessibility", "reading"],
         iconClass: "icon-text",
         hasToggle: false,
-        textSizeValue: 14 // new property for demonstration
+        textSizeValue: 14
       },
       {
         id: "software-update",
@@ -782,21 +770,6 @@
     const clearIcon      = document.querySelector('.clear-icon');
     const searchOverlay  = document.querySelector('.search-overlay');
     const searchResults  = document.querySelector('.search-results');
-    const toastContainer = document.getElementById('toast-container');
-
-    /* Show a toast message */
-    function showToast(message, duration = 2000) {
-      const toast = document.createElement('div');
-      toast.className = 'toast';
-      toast.textContent = message;
-      toastContainer.appendChild(toast);
-      void toast.offsetWidth;
-      toast.classList.add('show');
-      setTimeout(() => {
-        toast.classList.remove('show');
-        setTimeout(() => toastContainer.removeChild(toast), 300);
-      }, duration);
-    }
 
     /* COLLAPSIBLE HEADERS */
     document.querySelectorAll('.section-header').forEach(header => {
@@ -838,7 +811,6 @@
         if (item.name.toLowerCase().includes(lowerQuery)) return true;
         return item.keywords.some(keyword => keyword.toLowerCase().includes(lowerQuery));
       });
-      // sort matched items (same logic as before)
       matchedSettings.sort((a, b) => {
         const aNameLower = a.name.toLowerCase();
         const bNameLower = b.name.toLowerCase();
@@ -858,7 +830,6 @@
         resultItem.className = 'search-result-item';
         resultItem.setAttribute('data-setting-id', item.id);
 
-        // highlight matched text
         const itemNameLower = item.name.toLowerCase();
         const startIndex = itemNameLower.indexOf(lowerQuery);
         let highlightedName = item.name;
@@ -870,7 +841,6 @@
             item.name.substring(endIndex);
         }
 
-        // left side icon + name
         let resultContent = `
           <div class="search-result-icon ${item.iconClass}">
             <img src="wifi.png" style="opacity: 0;" alt="" />
@@ -879,11 +849,6 @@
           <div class="search-result-name">${highlightedName}</div>
         `;
 
-        // right side controls
-        // 1) If item.hasToggle => show toggle
-        // 2) If item.id === 'display-brightness' => show a small slider
-        // 3) If item.id === 'text-size' => show +/- buttons
-        // Otherwise, if no special control => show category text
         let rightSideHTML = '';
         if (item.id === 'display-brightness') {
           rightSideHTML = `
@@ -918,15 +883,13 @@
 
         resultItem.innerHTML = resultContent + rightSideHTML;
 
-        // if user clicks left side => navigate
         resultItem.addEventListener('click', (e) => {
-          // if click is not inside right-side controls, navigate
           if (
             e.target.closest('.toggle-switch') ||
             e.target.closest('.search-brightness-range') ||
             e.target.closest('.text-size-control')
           ) {
-            return; // handled below
+            return;
           }
           navigateToSetting(item.id);
         });
@@ -934,8 +897,6 @@
         searchResults.appendChild(resultItem);
       });
 
-      // Now attach event listeners for toggles, sliders, +/- inside the results
-      // 1) toggles
       document.querySelectorAll('.search-results .toggle-switch').forEach(toggle => {
         toggle.addEventListener('click', function(e) {
           e.stopPropagation();
@@ -958,19 +919,8 @@
               } else {
                 turnOffAirplane();
               }
-            } else {
-              if (isActive !== wasActive) {
-                showToast(`${settingItem.name} ${isActive ? 'On' : 'Off'}`);
-              }
-              if (["wifi","bluetooth","cellular","hotspot"].includes(settingId) && isActive) {
-                const airplaneItem = settingsItems.find(a => a.id === "airplane");
-                if (airplaneItem && airplaneItem.toggleState) {
-                  turnOffAirplane();
-                }
-              }
-              if (["wifi","bluetooth","cellular"].includes(settingId)) {
-                syncToggleState(settingId, isActive);
-              }
+            } else if (["wifi", "bluetooth", "cellular"].includes(settingId)) {
+              syncToggleState(settingId, isActive);
             }
           }
           if (navigator.vibrate) {
@@ -979,7 +929,6 @@
         });
       });
 
-      // 2) brightness sliders
       document.querySelectorAll('.search-results .search-brightness-range').forEach(slider => {
         slider.addEventListener('input', function(e) {
           e.stopPropagation();
@@ -998,7 +947,6 @@
         });
       });
 
-      // 3) text-size +/- controls
       document.querySelectorAll('.search-results .text-size-control').forEach(control => {
         const parentItem = control.closest('.search-result-item');
         if (!parentItem) return;
@@ -1014,13 +962,11 @@
           e.stopPropagation();
           settingItem.textSizeValue = Math.max(8, (settingItem.textSizeValue || 14) - 1);
           valSpan.textContent = settingItem.textSizeValue;
-          showToast(`Text Size: ${settingItem.textSizeValue}`);
         });
         plusBtn.addEventListener('click', (e) => {
           e.stopPropagation();
           settingItem.textSizeValue = Math.min(72, (settingItem.textSizeValue || 14) + 1);
           valSpan.textContent = settingItem.textSizeValue;
-          showToast(`Text Size: ${settingItem.textSizeValue}`);
         });
       });
     }
@@ -1029,11 +975,9 @@
     function navigateToSetting(settingId) {
       const targetSetting = document.querySelector(`.section-item[data-setting-id="${settingId}"]`);
       if (targetSetting) {
-        // If parent section is collapsed, expand it
         const parentSection = targetSetting.closest('.section');
         if (parentSection && parentSection.classList.contains('collapsed')) {
           parentSection.classList.remove('collapsed');
-          // also fix arrow
           const header = document.querySelector(`.section-header[data-collapse-target="#${parentSection.id}"]`);
           if (header) {
             const arrow = header.querySelector('.collapse-arrow');
@@ -1043,13 +987,11 @@
           }
         }
 
-        // close search
         searchInput.value = '';
         searchResults.classList.remove('active');
         searchOverlay.classList.remove('active');
         toggleClearIcon();
 
-        // highlight & scroll
         targetSetting.style.backgroundColor = '#e6f2ff';
         targetSetting.scrollIntoView({ behavior: 'smooth', block: 'center' });
         targetSetting.focus();
@@ -1078,9 +1020,6 @@
                 turnOffAirplane();
               }
             } else {
-              if (isActive !== wasActive) {
-                showToast(`${settingData.name} ${isActive ? 'On' : 'Off'}`);
-              }
               if (["wifi", "bluetooth", "cellular", "hotspot"].includes(settingId) && isActive) {
                 const airplaneItem = settingsItems.find(a => a.id === "airplane");
                 if (airplaneItem && airplaneItem.toggleState) {
@@ -1095,7 +1034,6 @@
                 if (cellularItem && !cellularItem.toggleState) {
                   syncToggleState("cellular", true);
                   cellularItem.toggleState = true;
-                  showToast("Cellular On (required for Hotspot)");
                 }
               }
               if (settingId === "low-power-mode") {
@@ -1141,14 +1079,9 @@
             if (cellularItem && !cellularItem.toggleState) {
               syncToggleState("cellular", true);
               cellularItem.toggleState = true;
-              showToast("Cellular On (required for Hotspot)");
             }
           }
           syncToggleState(settingId, isActive);
-          const label = this.querySelector('.connectivity-label').textContent;
-          if (isActive !== wasActive) {
-            showToast(`${label} ${isActive ? 'On' : 'Off'}`);
-          }
         }
         if (navigator.vibrate) {
           navigator.vibrate(5);
@@ -1173,7 +1106,6 @@
             settingItem.toggleState = false;
           }
           syncToggleState(id, false);
-          showToast(`${settingItem.name} Off`);
         }
       });
       const airplaneToggle = document.querySelector('.section-item[data-setting-id="airplane"] .toggle-switch');
@@ -1190,7 +1122,6 @@
         airplaneItem.toggleState = true;
       }
       showAirplaneStatus(true);
-      showToast("Airplane On");
     }
 
     /* Turn OFF airplane => user can re-enable wifi etc. */
@@ -1209,7 +1140,6 @@
         mainToggle.setAttribute('aria-checked', 'false');
       }
       showAirplaneStatus(false);
-      showToast("Airplane Off");
     }
 
     /* Show/hide icons for airplane mode (battery always on) */
@@ -1280,7 +1210,6 @@
     /* Update screen brightness for prototype */
     function updateScreenBrightness(value) {
       const container = document.querySelector('.container');
-      // Map 0-100 to 0.5-1.0 brightness range (50% to 100%)
       const brightness = 0.5 + (value / 100) * 0.5;
       container.style.filter = `brightness(${brightness})`;
     }
@@ -1322,14 +1251,12 @@
 
     /* On load, sync pinned toggles and status bar icons */
     window.addEventListener('DOMContentLoaded', () => {
-      // sync pinned states
       ["wifi", "bluetooth", "airplane", "cellular"].forEach(id => {
         const item = settingsItems.find(s => s.id === id);
         if (item) {
           syncToggleState(id, item.toggleState);
         }
       });
-      // reflect wifi/cellular icons
       const wifiStatusIcon = document.querySelector('.status-bar img[alt="Wi-Fi Status"]');
       const wifiSetting = settingsItems.find(i => i.id === "wifi");
       if (wifiStatusIcon && wifiSetting) {
@@ -1340,7 +1267,6 @@
       if (lteStatusIcon && cellularSetting) {
         lteStatusIcon.style.display = cellularSetting.toggleState ? 'inline' : 'none';
       }
-      // if airplane is on from the start
       const planeItem = settingsItems.find(i => i.id === "airplane");
       if (planeItem && planeItem.toggleState) {
         showAirplaneStatus(true);
@@ -1348,13 +1274,12 @@
         showAirplaneStatus(false);
       }
 
-      // Also set main brightness slider from the item
       const brightnessItem = settingsItems.find(i => i.id === "display-brightness");
       if (brightnessItem) {
         const mainSlider = document.querySelector('.main-brightness-range');
         if (mainSlider) {
           mainSlider.value = brightnessItem.brightnessValue || 100;
-          updateScreenBrightness(mainSlider.value); // Set initial brightness
+          updateScreenBrightness(mainSlider.value);
           mainSlider.addEventListener('input', function() {
             brightnessItem.brightnessValue = parseInt(this.value, 10);
             updateScreenBrightness(this.value);
