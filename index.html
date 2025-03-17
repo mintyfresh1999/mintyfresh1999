@@ -451,7 +451,7 @@
             <div class="item-name">Display Brightness</div>
           </div>
           <div class="right-content brightness-controls">
-            <input type="range" class="brightness-range main-brightness-range" min="0" max="100" value="50" />
+            <input type="range" class="brightness-range main-brightness-range" min="0" max="100" value="100" />
           </div>
         </div>
         <!-- Wi-Fi Row with Toggle -->
@@ -669,7 +669,7 @@
         keywords: ["display", "brightness", "screen", "light", "dim"],
         iconClass: "icon-display",
         hasToggle: false,
-        brightnessValue: 100
+        brightnessValue: 100 // Changed to start at 100%
       },
       {
         id: "wifi",
@@ -785,7 +785,7 @@
     const toastContainer = document.getElementById('toast-container');
 
     /* Show a toast message */
-    function showToast(message, duration = 750) {
+    function showToast(message, duration = 2000) {
       const toast = document.createElement('div');
       toast.className = 'toast';
       toast.textContent = message;
@@ -890,7 +890,7 @@
             <div class="search-result-control">
               <input type="range"
                      class="brightness-range search-brightness-range"
-                     min="0" max="100" value="${item.brightnessValue || 50}" />
+                     min="0" max="100" value="${item.brightnessValue || 100}" />
             </div>
           `;
         } else if (item.id === 'text-size') {
@@ -1081,14 +1081,22 @@
               if (isActive !== wasActive) {
                 showToast(`${settingData.name} ${isActive ? 'On' : 'Off'}`);
               }
-              if (["wifi","bluetooth","cellular","hotspot"].includes(settingId) && isActive) {
+              if (["wifi", "bluetooth", "cellular", "hotspot"].includes(settingId) && isActive) {
                 const airplaneItem = settingsItems.find(a => a.id === "airplane");
                 if (airplaneItem && airplaneItem.toggleState) {
                   turnOffAirplane();
                 }
               }
-              if (["wifi","bluetooth","cellular"].includes(settingId)) {
+              if (["wifi", "bluetooth", "cellular"].includes(settingId)) {
                 syncToggleState(settingId, isActive);
+              }
+              if (settingId === "hotspot" && isActive) {
+                const cellularItem = settingsItems.find(i => i.id === "cellular");
+                if (cellularItem && !cellularItem.toggleState) {
+                  syncToggleState("cellular", true);
+                  cellularItem.toggleState = true;
+                  showToast("Cellular On (required for Hotspot)");
+                }
               }
               if (settingId === "low-power-mode") {
                 updateBatteryStatusIcon();
@@ -1122,11 +1130,18 @@
             turnOffAirplane();
           }
         } else {
-          // if turning on wifi/bt/cellular/hotspot while airplane is on => turn airplane off
-          if (["wifi","bluetooth","cellular","hotspot"].includes(settingId) && isActive) {
+          if (["wifi", "bluetooth", "cellular", "hotspot"].includes(settingId) && isActive) {
             const airplaneItem = settingsItems.find(a => a.id === "airplane");
             if (airplaneItem && airplaneItem.toggleState) {
               turnOffAirplane();
+            }
+          }
+          if (settingId === "hotspot" && isActive) {
+            const cellularItem = settingsItems.find(i => i.id === "cellular");
+            if (cellularItem && !cellularItem.toggleState) {
+              syncToggleState("cellular", true);
+              cellularItem.toggleState = true;
+              showToast("Cellular On (required for Hotspot)");
             }
           }
           syncToggleState(settingId, isActive);
@@ -1143,11 +1158,17 @@
 
     /* Turn ON airplane => disable wifi/bt/cellular/hotspot */
     function turnOnAirplane() {
-      ["wifi","bluetooth","cellular","hotspot"].forEach(id => {
+      ["wifi", "bluetooth", "cellular", "hotspot"].forEach(id => {
         const pinnedIcon = document.querySelector(`.connectivity-button[data-setting-id="${id}"] .connectivity-icon`);
         const settingItem = settingsItems.find(s => s.id === id);
-        if (pinnedIcon && pinnedIcon.classList.contains('active')) {
-          pinnedIcon.classList.remove('active');
+        const mainToggle = document.querySelector(`.section-item[data-setting-id="${id}"] .toggle-switch`);
+        if ((pinnedIcon && pinnedIcon.classList.contains('active')) || 
+            (mainToggle && mainToggle.classList.contains('active'))) {
+          if (pinnedIcon) pinnedIcon.classList.remove('active');
+          if (mainToggle) {
+            mainToggle.classList.remove('active');
+            mainToggle.setAttribute('aria-checked', 'false');
+          }
           if (settingItem) {
             settingItem.toggleState = false;
           }
