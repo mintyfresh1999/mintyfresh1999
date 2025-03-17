@@ -669,7 +669,7 @@
         keywords: ["display", "brightness", "screen", "light", "dim"],
         iconClass: "icon-display",
         hasToggle: false,
-        brightnessValue: 50 // new property for demonstration
+        brightnessValue: 100
       },
       {
         id: "wifi",
@@ -1332,7 +1332,7 @@
       if (brightnessItem) {
         const mainSlider = document.querySelector('.main-brightness-range');
         if (mainSlider) {
-          mainSlider.value = brightnessItem.brightnessValue || 50;
+          mainSlider.value = brightnessItem.brightnessValue || 100;
           updateScreenBrightness(mainSlider.value); // Set initial brightness
           mainSlider.addEventListener('input', function() {
             brightnessItem.brightnessValue = parseInt(this.value, 10);
