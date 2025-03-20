@@ -23,9 +23,7 @@
     }
 
     /* RESET & BASE STYLES */
-    * {
-      margin: 0; padding: 0; box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     html, body {
       background-color: #f2f2f7;
       font-family: 'SF Pro Text', -apple-system, system-ui, sans-serif;
@@ -168,12 +166,11 @@
     .search-result-toggle {
       margin-left: auto; padding-left: 8px;
     }
-
     .search-result-control {
       margin-left: auto; display: flex; align-items: center; gap: 8px;
     }
     .search-brightness-range {
-      width: 120px; /* smaller slider in the search result */
+      width: 120px;
     }
     .text-size-control button {
       width: 28px; height: 28px; border: none; border-radius: 4px;
@@ -226,32 +223,44 @@
     }
     .connectivity-button {
       display: flex; flex-direction: column; align-items: center;
-      width: 70px; cursor: pointer;
-      position: relative;
+      width: 70px; cursor: pointer; position: relative;
     }
     .connectivity-icon {
       width: 50px; height: 50px; border-radius: 50%;
-      background-color: #c7c7cc; display: flex; justify-content: center; align-items: center;
+      display: flex; justify-content: center; align-items: center;
       margin-bottom: 6px; transition: background-color 0.2s ease;
     }
+    /* Toggleable settings with inactive color */
+    .connectivity-icon.icon-wifi,
+    .connectivity-icon.icon-bluetooth,
+    .connectivity-icon.icon-cellular,
+    .connectivity-icon.icon-hotspot,
+    .connectivity-icon.icon-airplane,
+    .connectivity-icon.icon-location,
+    .connectivity-icon.icon-battery,
+    .connectivity-icon.icon-display {
+      background-color: #c7c7cc;
+    }
+    /* Active states for toggleable settings */
     .connectivity-icon.icon-wifi.active,
     .connectivity-icon.icon-bluetooth.active,
-    .connectivity-icon.icon-location.active {
+    .connectivity-icon.icon-display.active {
       background-color: #007aff;
     }
     .connectivity-icon.icon-cellular.active,
     .connectivity-icon.icon-hotspot.active,
+    .connectivity-icon.icon-location.active,
     .connectivity-icon.icon-battery.active {
-      background-color: #34c759; /* Updated Low Power Mode active color */
+      background-color: #34c759;
     }
     .connectivity-icon.icon-airplane.active {
       background-color: #ff9500;
     }
-    .connectivity-icon.icon-update,
+    /* Non-toggleable settings: consistent #8e8e93 background */
+    .connectivity-icon.icon-darkmode,
     .connectivity-icon.icon-storage,
-    .connectivity-icon.icon-display, /* Static Display Brightness */
-    .connectivity-icon.icon-darkmode /* Static Dark Mode */
-    {
+    .connectivity-icon.icon-text,
+    .connectivity-icon.icon-update {
       background-color: #8e8e93;
     }
     .connectivity-icon img {
@@ -355,69 +364,51 @@
 
     /* PINNED MODAL */
     .pinned-modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0,0,0,0.5);
-      display: none;
-      justify-content: center;
-      z-index: 100;
-      transition: opacity 0.2s ease;
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.4);
+      display: none; justify-content: center; align-items: flex-start;
+      z-index: 100; opacity: 0; transition: opacity 0.2s ease;
     }
     .pinned-modal.active {
-      display: flex;
-      opacity: 1;
+      display: flex; opacity: 1;
     }
     .modal-content {
-      background-color: white;
-      border-radius: 16px;
-      padding: 20px;
-      width: 80%;
-      max-height: 35%;
-      overflow-y: auto;
-      position: relative;
+      background-color: #fff; border-radius: 13px;
+      padding: 10px 0 20px; width: 100%; max-width: 340px;
+      max-height: 70vh; overflow-y: auto;
       box-shadow: 0 4px 16px rgba(0,0,0,0.2);
-      margin-top: 200px;
+      transform: scale(0.95);
+      transition: transform 0.2s ease-out;
+      margin-top: 15vh;
     }
-    .close-button {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: none;
-      border: none;
-      font-size: 24px;
-      cursor: pointer;
-      color: #007aff;
+    .pinned-modal.active .modal-content {
+      transform: scale(1);
     }
     .modal-title {
-      font-size: 18px;
-      font-weight: 600;
-      text-align: center;
-      margin-bottom: 20px;
+      font-family: 'SF Pro Display', sans-serif;
+      font-size: 20px; font-weight: 600; text-align: center;
+      padding: 10px 0; color: #1c1c1e;
+      border-bottom: 1px solid #d2d2d7;
+    }
+    .close-button {
+      position: absolute; top: 10px; right: 15px;
+      background: none; border: none; font-size: 24px;
+      cursor: pointer; color: #007aff; font-weight: 300;
     }
     .settings-list {
-      list-style: none;
-      padding: 0;
+      list-style: none; padding: 0; margin: 0;
+      background-color: #fff; border-radius: 10px;
     }
     .settings-list li {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 0;
-      border-bottom: 1px solid #e0e0e0;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 20px; border-bottom: 1px solid #d2d2d7;
+      font-size: 17px; color: #1c1c1e; cursor: pointer;
+      transition: background-color 0.2s ease;
     }
-    .settings-list li:last-child {
-      border-bottom: none;
-    }
-    .settings-list label {
-      font-size: 16px;
-      color: #1c1c1e;
-    }
+    .settings-list li:last-child { border-bottom: none; }
+    .settings-list li:hover { background-color: #f5f5f5; }
     .settings-list input[type="checkbox"] {
-      margin-left: 10px;
-      transform: scale(1.2);
+      width: 24px; height: 24px; accent-color: #007aff;
     }
 
     /* HOME INDICATOR */
@@ -717,7 +708,6 @@
   </div>
 
   <script>
-    // Settings database: Holds all settings data with properties for rendering and state
     const settingsItems = [
       {
         id: "display-brightness",
@@ -815,7 +805,7 @@
         category: "Display & Appearance",
         keywords: ["dark", "mode", "theme", "appearance", "night"],
         iconClass: "icon-darkmode",
-        hasToggle: false, // Reverted to non-toggle
+        hasToggle: false,
         iconSrc: "darkmode.png"
       },
       {
@@ -867,10 +857,9 @@
     const settingsList   = pinnedModal.querySelector('.settings-list');
     const closeButton    = pinnedModal.querySelector('.close-button');
 
-    /* Array to track pinned settings (limited to 8 by default) */
-    let pinnedSettings = ["wifi", "bluetooth", "airplane", "cellular", "software-update", "location", "storage", "dark-mode"];
+    /* Initial pinned settings */
+    let pinnedSettings = ["wifi", "bluetooth", "airplane", "cellular", "software-update", "text-size", "storage", "dark-mode", "location", "hotspot", "battery"];
 
-    // Renders the pinned section based on the pinnedSettings array
     function renderPinnedSection() {
       const pinnedContainer = document.querySelector('.connectivity-controls');
       pinnedContainer.innerHTML = '';
@@ -911,7 +900,6 @@
       attachPinnedButtonListeners();
     }
 
-    // Attaches click listeners to pinned buttons
     function attachPinnedButtonListeners() {
       document.querySelectorAll('.connectivity-button').forEach(button => {
         button.addEventListener('click', function() {
@@ -920,7 +908,6 @@
           if (!setting) return;
 
           if (setting.hasToggle) {
-            // Toggle functionality for settings with toggles
             setting.toggleState = !setting.toggleState;
             syncToggleState(settingId, setting.toggleState);
             const icon = this.querySelector('.connectivity-icon');
@@ -938,7 +925,6 @@
             }
             if (navigator.vibrate) navigator.vibrate(5);
           } else {
-            // Navigate to section for non-toggle settings
             navigateToSetting(settingId);
           }
         });
@@ -958,7 +944,7 @@
       });
     });
 
-    /* Searching logic + controlling toggles/sliders from results */
+    /* SEARCH LOGIC */
     function toggleClearIcon() {
       if (searchInput.value.length > 0) {
         clearIcon.classList.add('visible');
@@ -1138,7 +1124,6 @@
       });
     }
 
-    // Expands section if collapsed, scrolls to item
     function navigateToSetting(settingId) {
       const targetSetting = document.querySelector(`.section-item[data-setting-id="${settingId}"]`);
       if (targetSetting) {
@@ -1164,7 +1149,6 @@
       }
     }
 
-    // Syncs toggle state across pinned section, main section, and status bar
     function syncToggleState(settingId, newState) {
       const setting = settingsItems.find(i => i.id === settingId);
       if (!setting || !setting.hasToggle) return;
@@ -1191,7 +1175,6 @@
       }
     }
 
-    // Main toggles within sections
     document.querySelectorAll('.section-item .toggle-switch').forEach(toggle => {
       toggle.addEventListener('click', function(e) {
         e.stopPropagation();
@@ -1259,16 +1242,24 @@
         checkbox.type = 'checkbox';
         checkbox.setAttribute('data-setting-id', setting.id);
         checkbox.checked = pinnedSettings.includes(setting.id);
-        label.appendChild(document.createTextNode(setting.name));
+        label.textContent = setting.name;
         li.appendChild(label);
         li.appendChild(checkbox);
         list.appendChild(li);
+
+        li.addEventListener('click', function(e) {
+          if (e.target !== checkbox) {
+            checkbox.checked = !checkbox.checked;
+            checkbox.dispatchEvent(new Event('change'));
+          }
+        });
       });
       pinnedModal.classList.add('active');
     }
 
     function closePinnedModal() {
       pinnedModal.classList.remove('active');
+      renderPinnedSection();
     }
 
     pinnedModal.addEventListener('click', function(e) {
@@ -1288,7 +1279,6 @@
       }
     });
 
-    /* Turn ON airplane => disable wifi/bt/cellular/hotspot/location */
     function turnOnAirplane() {
       ["wifi", "bluetooth", "cellular", "hotspot", "location"].forEach(id => {
         const pinnedIcon = document.querySelector(`.connectivity-button[data-setting-id="${id}"] .connectivity-icon`);
@@ -1317,7 +1307,6 @@
       showAirplaneStatus(true);
     }
 
-    /* Turn OFF airplane => user can re-enable wifi etc. */
     function turnOffAirplane() {
       const planeItem = settingsItems.find(s => s.id === "airplane");
       if (planeItem) planeItem.toggleState = false;
@@ -1331,7 +1320,6 @@
       showAirplaneStatus(false);
     }
 
-    /* Show/hide icons for airplane mode (battery always on) */
     function showAirplaneStatus(isOn) {
       const airplaneIconTop = document.querySelector('.status-bar img[alt="Airplane Status"]');
       const cellIcon = document.querySelector('.status-bar img[alt="Cellular Signal"]');
@@ -1354,7 +1342,6 @@
       }
     }
 
-    /* Update battery icon if low-power-mode changes */
     function updateBatteryStatusIcon() {
       const batteryImg = document.querySelector('.status-bar img[alt="Battery"]');
       const lowPowerSetting = settingsItems.find(item => item.id === "low-power-mode");
@@ -1365,14 +1352,12 @@
       }
     }
 
-    /* Update screen brightness for prototype */
     function updateScreenBrightness(value) {
       const container = document.querySelector('.container');
       const brightness = 0.5 + (value / 100) * 0.5;
       container.style.filter = `brightness(${brightness})`;
     }
 
-    // Search bar events
     searchInput.addEventListener('input', toggleClearIcon);
     clearIcon.addEventListener('click', () => {
       searchInput.value = '';
@@ -1404,10 +1389,11 @@
           toggleClearIcon();
           e.preventDefault();
         }
+      } else if (e.key === 'Escape' && pinnedModal.classList.contains('active')) {
+        closePinnedModal();
       }
     });
 
-    /* On load, sync pinned toggles and status bar icons */
     window.addEventListener('DOMContentLoaded', () => {
       settingsItems.forEach(item => {
         if (item.hasToggle) syncToggleState(item.id, item.toggleState);
