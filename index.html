@@ -240,22 +240,19 @@
       background-color: #007aff;
     }
     .connectivity-icon.icon-cellular.active,
-    .connectivity-icon.icon-hotspot.active {
-      background-color: #34c759;
-    }
-    .connectivity-icon.icon-airplane.active,
-    .connectivity-icon.icon-display.active,
+    .connectivity-icon.icon-hotspot.active,
     .connectivity-icon.icon-battery.active {
-      background-color: #ff9500;
+      background-color: #34c759; /* Updated Low Power Mode active color */
     }
-    .connectivity-icon.icon-darkmode.active {
-      background-color: #8e8e93; /* Active state for Dark Mode toggle */
+    .connectivity-icon.icon-airplane.active {
+      background-color: #ff9500;
     }
     .connectivity-icon.icon-update,
     .connectivity-icon.icon-storage,
-    .connectivity-icon.icon-text,
-    .connectivity-icon.icon-battery {
-      background-color: #8e8e93; /* Static dark grey for navigation items */
+    .connectivity-icon.icon-display, /* Static Display Brightness */
+    .connectivity-icon.icon-darkmode /* Static Dark Mode */
+    {
+      background-color: #8e8e93;
     }
     .connectivity-icon img {
       width: 24px; height: auto;
@@ -346,7 +343,6 @@
       transition: all 0.2s ease; cursor: pointer;
     }
     .toggle-switch.active { background-color: #34c759; }
-    .toggle-switch.active.icon-darkmode { background-color: #8e8e93; } /* Match pinned active color */
     .toggle-switch::before {
       content: ''; position: absolute; width: 27px; height: 27px;
       border-radius: 50%; background-color: white;
@@ -579,7 +575,8 @@
             <div class="item-name">Dark Mode</div>
           </div>
           <div class="right-content">
-            <div class="toggle-switch icon-darkmode" role="switch" aria-checked="false"></div>
+            <span>Auto</span>
+            <span class="chevron">›</span>
           </div>
         </div>
         <div class="section-item" tabindex="0" data-setting-id="text-size">
@@ -818,8 +815,7 @@
         category: "Display & Appearance",
         keywords: ["dark", "mode", "theme", "appearance", "night"],
         iconClass: "icon-darkmode",
-        hasToggle: true, // Changed to toggle
-        toggleState: false, // Default off
+        hasToggle: false, // Reverted to non-toggle
         iconSrc: "darkmode.png"
       },
       {
@@ -939,8 +935,6 @@
                 syncToggleState("cellular", true);
                 cellularItem.toggleState = true;
               }
-            } else if (settingId === "dark-mode") {
-              toggleDarkMode(setting.toggleState);
             }
             if (navigator.vibrate) navigator.vibrate(5);
           } else {
@@ -1048,7 +1042,7 @@
           const toggleStateClass = item.toggleState ? 'active' : '';
           rightSideHTML = `
             <div class="search-result-toggle">
-              <div class="toggle-switch ${toggleStateClass} ${item.id === 'dark-mode' ? 'icon-darkmode' : ''}"
+              <div class="toggle-switch ${toggleStateClass}"
                    role="switch"
                    aria-checked="${item.toggleState}"
                    data-setting-id="${item.id}">
@@ -1096,8 +1090,6 @@
               else turnOffAirplane();
             } else if (["wifi", "bluetooth", "cellular", "location"].includes(settingId)) {
               syncToggleState(settingId, isActive);
-            } else if (settingId === "dark-mode") {
-              toggleDarkMode(isActive);
             }
           }
           if (navigator.vibrate) navigator.vibrate(5);
@@ -1196,8 +1188,6 @@
         if (lteStatusIcon) lteStatusIcon.style.display = newState ? 'inline' : 'none';
       } else if (settingId === "low-power-mode") {
         updateBatteryStatusIcon();
-      } else if (settingId === "dark-mode") {
-        toggleDarkMode(newState);
       }
     }
 
@@ -1232,7 +1222,6 @@
                 }
               }
               if (settingId === "low-power-mode") updateBatteryStatusIcon();
-              if (settingId === "dark-mode") toggleDarkMode(isActive);
             }
           }
         }
@@ -1381,20 +1370,6 @@
       const container = document.querySelector('.container');
       const brightness = 0.5 + (value / 100) * 0.5;
       container.style.filter = `brightness(${brightness})`;
-    }
-
-    /* Toggle Dark Mode for prototype */
-    function toggleDarkMode(isOn) {
-      const body = document.body;
-      if (isOn) {
-        body.style.backgroundColor = '#1c1c1e';
-        body.style.color = '#ffffff';
-        document.querySelector('.container').style.backgroundColor = '#1c1c1e';
-      } else {
-        body.style.backgroundColor = '#f2f2f7';
-        body.style.color = '#1c1c1e';
-        document.querySelector('.container').style.backgroundColor = '#f2f2f7';
-      }
     }
 
     // Search bar events
