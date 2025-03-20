@@ -235,17 +235,25 @@
       margin-bottom: 6px; transition: background-color 0.2s ease;
     }
     .connectivity-icon.icon-wifi.active,
-    .connectivity-icon.icon-bluetooth.active {
+    .connectivity-icon.icon-bluetooth.active,
+    .connectivity-icon.icon-location.active {
       background-color: #007aff;
     }
     .connectivity-icon.icon-cellular.active,
-    .connectivity-icon.icon-hotspot.active { /* Hotspot: Green like Cellular */
+    .connectivity-icon.icon-hotspot.active {
       background-color: #34c759;
     }
     .connectivity-icon.icon-airplane.active,
-    .connectivity-icon.icon-display.active, /* Auto-Dim Display: Orange like Airplane */
-    .connectivity-icon.icon-battery.active { /* Low Power Mode: Orange like Airplane */
+    .connectivity-icon.icon-display.active,
+    .connectivity-icon.icon-battery.active {
       background-color: #ff9500;
+    }
+    .connectivity-icon.icon-update,
+    .connectivity-icon.icon-storage,
+    .connectivity-icon.icon-text,
+    .connectivity-icon.icon-darkmode,
+    .connectivity-icon.icon-battery {
+      background-color: #8e8e93;
     }
     .connectivity-icon img {
       width: 24px; height: auto;
@@ -311,6 +319,7 @@
     .section-item .item-icon.icon-storage { background-color: #8e8e93; }
     .section-item .item-icon.icon-hotspot { background-color: #34c759; }
     .section-item .item-icon.icon-airplane { background-color: #ff9500; }
+    .section-item .item-icon.icon-location { background-color: #007aff; }
 
     /* BRIGHTNESS SLIDER */
     .brightness-controls { display: flex; align-items: center; gap: 10px; }
@@ -346,7 +355,7 @@
     }
 
     /* PINNED MODAL */
-.pinned-modal {
+    .pinned-modal {
       position: fixed;
       top: 0;
       left: 0;
@@ -355,13 +364,12 @@
       background-color: rgba(0,0,0,0.5);
       display: none;
       justify-content: center;
-      /* Removed align-items: center; using margin-top on .modal-content instead */
       z-index: 100;
-      transition: opacity 0.2s ease; /* Smooth fade-in effect */
+      transition: opacity 0.2s ease;
     }
     .pinned-modal.active {
       display: flex;
-      opacity: 1; /* Ensures visibility with smooth transition */
+      opacity: 1;
     }
     .modal-content {
       background-color: white;
@@ -372,7 +380,7 @@
       overflow-y: auto;
       position: relative;
       box-shadow: 0 4px 16px rgba(0,0,0,0.2);
-      margin-top: 200px; /* Positions the modal 100px from the top; adjust this value */
+      margin-top: 200px;
     }
     .close-button {
       position: absolute;
@@ -563,8 +571,7 @@
         <div class="section-item" tabindex="0" data-setting-id="dark-mode">
           <div class="left-content">
             <div class="item-icon icon-darkmode">
-              <img src="wifi.png" style="opacity: 0;" alt="placeholder" />
-              <span style="position:absolute;font-size:14px;opacity:0.9;">🌙</span>
+              <img src="darkmode.png" alt="Dark Mode icon" />
             </div>
             <div class="item-name">Dark Mode</div>
           </div>
@@ -639,6 +646,17 @@
             <span class="chevron">›</span>
           </div>
         </div>
+        <div class="section-item" tabindex="0" data-setting-id="location">
+          <div class="left-content">
+            <div class="item-icon icon-location">
+              <img src="location.png" alt="Location icon" />
+            </div>
+            <div class="item-name">Location</div>
+          </div>
+          <div class="right-content">
+            <div class="toggle-switch" role="switch" aria-checked="false"></div>
+          </div>
+        </div>
       </div>
 
       <!-- System -->
@@ -650,8 +668,7 @@
         <div class="section-item" tabindex="0" data-setting-id="software-update">
           <div class="left-content">
             <div class="item-icon icon-update">
-              <img src="wifi.png" style="opacity: 0;" alt="placeholder" />
-              <span style="position:absolute;font-size:14px;opacity:0.9;">↻</span>
+              <img src="software-update.png" alt="Software Update icon" />
             </div>
             <div class="item-name">Software Update</div>
           </div>
@@ -675,8 +692,7 @@
         <div class="section-item" tabindex="0" data-setting-id="storage">
           <div class="left-content">
             <div class="item-icon icon-storage">
-              <img src="wifi.png" style="opacity:0;" alt="placeholder" />
-              <span style="position:absolute;font-size:14px;opacity:0.9;">📦</span>
+              <img src="storage.png" alt="Storage icon" />
             </div>
             <div class="item-name">Storage</div>
           </div>
@@ -775,6 +791,16 @@
         iconSrc: "hotspot.png"
       },
       {
+        id: "location",
+        name: "Location",
+        category: "Connections",
+        keywords: ["location", "gps", "tracking", "privacy", "maps"],
+        iconClass: "icon-location",
+        hasToggle: true,
+        toggleState: false,
+        iconSrc: "location.png"
+      },
+      {
         id: "auto-dim",
         name: "Auto-Dim Display",
         category: "Display & Appearance",
@@ -791,7 +817,7 @@
         keywords: ["dark", "mode", "theme", "appearance", "night"],
         iconClass: "icon-darkmode",
         hasToggle: false,
-        iconText: "🌙"
+        iconSrc: "darkmode.png" // Updated to use an image
       },
       {
         id: "text-size",
@@ -810,7 +836,7 @@
         keywords: ["software", "update", "ios", "version", "upgrade"],
         iconClass: "icon-update",
         hasToggle: false,
-        iconText: "↻"
+        iconSrc: "software-update.png" // Updated to use an image
       },
       {
         id: "battery",
@@ -828,7 +854,7 @@
         keywords: ["storage", "memory", "space", "capacity", "icloud"],
         iconClass: "icon-storage",
         hasToggle: false,
-        iconText: "📦"
+        iconSrc: "storage.png" // Updated to use an image
       }
     ];
 
@@ -842,8 +868,8 @@
     const settingsList   = pinnedModal.querySelector('.settings-list');
     const closeButton    = pinnedModal.querySelector('.close-button');
 
-    /* Array to track pinned settings */
-    let pinnedSettings = ["wifi", "bluetooth", "airplane", "cellular"];
+    /* Array to track pinned settings (limited to 8 by default) */
+    let pinnedSettings = ["wifi", "bluetooth", "airplane", "cellular", "software-update", "location", "storage", "dark-mode"];
 
     // Renders the pinned section based on the pinnedSettings array
     function renderPinnedSection() {
@@ -861,7 +887,7 @@
 
         const iconDiv = document.createElement('div');
         iconDiv.className = `connectivity-icon ${setting.iconClass}`;
-        if (setting.toggleState) iconDiv.classList.add('active');
+        if (setting.hasToggle && setting.toggleState) iconDiv.classList.add('active');
 
         if (setting.iconSrc) {
           const img = document.createElement('img');
@@ -886,15 +912,18 @@
       attachPinnedButtonListeners();
     }
 
-    // Attaches click listeners to pinned buttons for toggling
+    // Attaches click listeners to pinned buttons
     function attachPinnedButtonListeners() {
       document.querySelectorAll('.connectivity-button').forEach(button => {
         button.addEventListener('click', function() {
           const settingId = this.getAttribute('data-setting-id');
           const setting = settingsItems.find(s => s.id === settingId);
-          if (setting) {
+          if (!setting) return;
+
+          if (setting.hasToggle) {
+            // Toggle functionality for settings with toggles
             setting.toggleState = !setting.toggleState;
-            syncToggleState(settingId, setting.toggleState); // Sync with main section
+            syncToggleState(settingId, setting.toggleState);
             const icon = this.querySelector('.connectivity-icon');
             icon.classList.toggle('active', setting.toggleState);
 
@@ -909,6 +938,9 @@
               }
             }
             if (navigator.vibrate) navigator.vibrate(5);
+          } else {
+            // Navigate to section for non-toggle settings
+            navigateToSetting(settingId);
           }
         });
       });
@@ -923,9 +955,7 @@
         if (!sectionElem) return;
         sectionElem.classList.toggle('collapsed');
         const arrow = header.querySelector('.collapse-arrow');
-        if (arrow) {
-          arrow.classList.toggle('collapsed-arrow');
-        }
+        if (arrow) arrow.classList.toggle('collapsed-arrow');
       });
     });
 
@@ -1057,18 +1087,13 @@
           if (settingItem) {
             settingItem.toggleState = isActive;
             if (settingId === "airplane") {
-              if (isActive) {
-                turnOnAirplane();
-              } else {
-                turnOffAirplane();
-              }
-            } else if (["wifi", "bluetooth", "cellular"].includes(settingId)) {
+              if (isActive) turnOnAirplane();
+              else turnOffAirplane();
+            } else if (["wifi", "bluetooth", "cellular", "location"].includes(settingId)) {
               syncToggleState(settingId, isActive);
             }
           }
-          if (navigator.vibrate) {
-            navigator.vibrate(5);
-          }
+          if (navigator.vibrate) navigator.vibrate(5);
         });
       });
 
@@ -1124,9 +1149,7 @@
           const header = document.querySelector(`.section-header[data-collapse-target="#${parentSection.id}"]`);
           if (header) {
             const arrow = header.querySelector('.collapse-arrow');
-            if (arrow) {
-              arrow.classList.remove('collapsed-arrow');
-            }
+            if (arrow) arrow.classList.remove('collapsed-arrow');
           }
         }
 
@@ -1147,33 +1170,23 @@
       const setting = settingsItems.find(i => i.id === settingId);
       if (!setting || !setting.hasToggle) return;
 
-      // Update the data model
       setting.toggleState = newState;
 
-      // Sync pinned section
       const pinnedIcon = document.querySelector(`.connectivity-button[data-setting-id="${settingId}"] .connectivity-icon`);
-      if (pinnedIcon) {
-        pinnedIcon.classList.toggle('active', newState);
-      }
+      if (pinnedIcon) pinnedIcon.classList.toggle('active', newState);
 
-      // Sync main section toggle
       const mainToggle = document.querySelector(`.section-item[data-setting-id="${settingId}"] .toggle-switch`);
       if (mainToggle) {
         mainToggle.classList.toggle('active', newState);
         mainToggle.setAttribute('aria-checked', newState ? 'true' : 'false');
       }
 
-      // Update status bar icons based on toggle state
       if (settingId === "wifi") {
         const wifiStatusIcon = document.querySelector('.status-bar img[alt="Wi-Fi Status"]');
-        if (wifiStatusIcon) {
-          wifiStatusIcon.style.display = newState ? 'inline' : 'none';
-        }
+        if (wifiStatusIcon) wifiStatusIcon.style.display = newState ? 'inline' : 'none';
       } else if (settingId === "cellular") {
         const lteStatusIcon = document.querySelector('.status-bar img[alt="LTE Status"]');
-        if (lteStatusIcon) {
-          lteStatusIcon.style.display = newState ? 'inline' : 'none';
-        }
+        if (lteStatusIcon) lteStatusIcon.style.display = newState ? 'inline' : 'none';
       } else if (settingId === "low-power-mode") {
         updateBatteryStatusIcon();
       }
@@ -1193,19 +1206,14 @@
           const settingData = settingsItems.find(i => i.id === settingId);
           if (settingData) {
             settingData.toggleState = isActive;
-            syncToggleState(settingId, isActive); // Ensure pinned section syncs
+            syncToggleState(settingId, isActive);
             if (settingId === "airplane") {
-              if (isActive) {
-                turnOnAirplane();
-              } else {
-                turnOffAirplane();
-              }
+              if (isActive) turnOnAirplane();
+              else turnOffAirplane();
             } else {
-              if (["wifi", "bluetooth", "cellular", "hotspot"].includes(settingId) && isActive) {
+              if (["wifi", "bluetooth", "cellular", "hotspot", "location"].includes(settingId) && isActive) {
                 const airplaneItem = settingsItems.find(a => a.id === "airplane");
-                if (airplaneItem && airplaneItem.toggleState) {
-                  turnOffAirplane();
-                }
+                if (airplaneItem && airplaneItem.toggleState) turnOffAirplane();
               }
               if (settingId === "hotspot" && isActive) {
                 const cellularItem = settingsItems.find(i => i.id === "cellular");
@@ -1214,15 +1222,11 @@
                   cellularItem.toggleState = true;
                 }
               }
-              if (settingId === "low-power-mode") {
-                updateBatteryStatusIcon();
-              }
+              if (settingId === "low-power-mode") updateBatteryStatusIcon();
             }
           }
         }
-        if (navigator.vibrate) {
-          navigator.vibrate(5);
-        }
+        if (navigator.vibrate) navigator.vibrate(5);
       });
     });
 
@@ -1248,7 +1252,7 @@
     function openPinnedModal() {
       const list = settingsList;
       list.innerHTML = '';
-      const pinnableSettings = settingsItems.filter(item => item.hasToggle).sort((a, b) => a.name.localeCompare(b.name));
+      const pinnableSettings = settingsItems.sort((a, b) => a.name.localeCompare(b.name));
       pinnableSettings.forEach(setting => {
         const li = document.createElement('li');
         const label = document.createElement('label');
@@ -1268,11 +1272,8 @@
       pinnedModal.classList.remove('active');
     }
 
-    // Attach event listeners for modal
     pinnedModal.addEventListener('click', function(e) {
-      if (e.target === this) {
-        closePinnedModal();
-      }
+      if (e.target === this) closePinnedModal();
     });
     closeButton.addEventListener('click', closePinnedModal);
 
@@ -1280,9 +1281,7 @@
       if (e.target.type === 'checkbox') {
         const settingId = e.target.getAttribute('data-setting-id');
         if (e.target.checked) {
-          if (!pinnedSettings.includes(settingId)) {
-            pinnedSettings.push(settingId);
-          }
+          if (!pinnedSettings.includes(settingId)) pinnedSettings.push(settingId);
         } else {
           pinnedSettings = pinnedSettings.filter(id => id !== settingId);
         }
@@ -1290,9 +1289,9 @@
       }
     });
 
-    /* Turn ON airplane => disable wifi/bt/cellular/hotspot */
+    /* Turn ON airplane => disable wifi/bt/cellular/hotspot/location */
     function turnOnAirplane() {
-      ["wifi", "bluetooth", "cellular", "hotspot"].forEach(id => {
+      ["wifi", "bluetooth", "cellular", "hotspot", "location"].forEach(id => {
         const pinnedIcon = document.querySelector(`.connectivity-button[data-setting-id="${id}"] .connectivity-icon`);
         const settingItem = settingsItems.find(s => s.id === id);
         const mainToggle = document.querySelector(`.section-item[data-setting-id="${id}"] .toggle-switch`);
@@ -1303,9 +1302,7 @@
             mainToggle.classList.remove('active');
             mainToggle.setAttribute('aria-checked', 'false');
           }
-          if (settingItem) {
-            settingItem.toggleState = false;
-          }
+          if (settingItem) settingItem.toggleState = false;
           syncToggleState(id, false);
         }
       });
@@ -1315,26 +1312,18 @@
         airplaneToggle.setAttribute('aria-checked', 'true');
       }
       const airplanePinned = document.querySelector('.connectivity-button[data-setting-id="airplane"] .connectivity-icon');
-      if (airplanePinned) {
-        airplanePinned.classList.add('active');
-      }
+      if (airplanePinned) airplanePinned.classList.add('active');
       const airplaneItem = settingsItems.find(s => s.id === "airplane");
-      if (airplaneItem) {
-        airplaneItem.toggleState = true;
-      }
+      if (airplaneItem) airplaneItem.toggleState = true;
       showAirplaneStatus(true);
     }
 
     /* Turn OFF airplane => user can re-enable wifi etc. */
     function turnOffAirplane() {
       const planeItem = settingsItems.find(s => s.id === "airplane");
-      if (planeItem) {
-        planeItem.toggleState = false;
-      }
+      if (planeItem) planeItem.toggleState = false;
       const pinnedIcon = document.querySelector('.connectivity-button[data-setting-id="airplane"] .connectivity-icon');
-      if (pinnedIcon) {
-        pinnedIcon.classList.remove('active');
-      }
+      if (pinnedIcon) pinnedIcon.classList.remove('active');
       const mainToggle = document.querySelector('.section-item[data-setting-id="airplane"] .toggle-switch');
       if (mainToggle) {
         mainToggle.classList.remove('active');
@@ -1352,9 +1341,7 @@
       const batteryIcon = document.querySelector('.status-bar img[alt="Battery"]');
 
       if (batteryIcon) batteryIcon.style.display = 'inline';
-      if (airplaneIconTop) {
-        airplaneIconTop.style.display = isOn ? 'inline' : 'none';
-      }
+      if (airplaneIconTop) airplaneIconTop.style.display = isOn ? 'inline' : 'none';
       if (isOn) {
         if (cellIcon) cellIcon.style.display = 'none';
         if (wifiIcon) wifiIcon.style.display = 'none';
@@ -1423,17 +1410,12 @@
 
     /* On load, sync pinned toggles and status bar icons */
     window.addEventListener('DOMContentLoaded', () => {
-      // Initialize toggle states
       settingsItems.forEach(item => {
-        if (item.hasToggle) {
-          syncToggleState(item.id, item.toggleState);
-        }
+        if (item.hasToggle) syncToggleState(item.id, item.toggleState);
       });
 
-      // Render pinned section initially
       renderPinnedSection();
 
-      // Existing brightness slider initialization
       const brightnessItem = settingsItems.find(i => i.id === "display-brightness");
       if (brightnessItem) {
         const mainSlider = document.querySelector('.main-brightness-range');
