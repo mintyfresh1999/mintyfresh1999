@@ -144,8 +144,8 @@
       background-color: #f2f2f7;
     }
     .connectivity-button[data-setting-id="battery"] .connectivity-icon {
-  background-color: #8e8e93;
-}
+      background-color: #8e8e93;
+    }
     .search-result-icon {
       width: 26px; height: 26px; border-radius: 6px;
       display: flex; justify-content: center; align-items: center;
@@ -420,294 +420,368 @@
       margin: 8px auto; position: absolute; bottom: 8px; left: 50%;
       transform: translateX(-50%); z-index: 2;
     }
+
+    /* NEW STYLES FOR DESCRIPTION */
+    .flex-container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 20px;
+      padding: 20px;
+      flex-wrap: wrap;
+    }
+
+    .description {
+      max-width: 400px;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+      font-family: 'SF Pro Text', -apple-system, system-ui, sans-serif;
+      color: #1c1c1e;
+    }
+
+    .description h2 {
+      font-family: 'SF Pro Display', -apple-system, system-ui, sans-serif;
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .description h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-top: 15px;
+      margin-bottom: 5px;
+    }
+
+    .description p, .description ul {
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    .description ul {
+      list-style-type: disc;
+      padding-left: 20px;
+    }
+
+    .description li {
+      margin-bottom: 5px;
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <!-- Search Overlay -->
-    <div class="search-overlay"></div>
+  <div class="flex-container">
+    <div class="container">
+      <!-- Search Overlay -->
+      <div class="search-overlay"></div>
 
-    <!-- STATUS BAR -->
-    <div class="status-bar">
-      <div class="time">9:41</div>
-      <div class="right">
-        <img src="cellularbars.png" alt="Cellular Signal" />
-        <img src="wifi-black.png" alt="Wi-Fi Status" />
-        <img src="lte.png" alt="LTE Status" style="display: none;" />
-        <img src="battery.100percent.bolt.png" alt="Battery" />
-        <img src="airplane.png" alt="Airplane Status" />
+      <!-- STATUS BAR -->
+      <div class="status-bar">
+        <div class="time">9:41</div>
+        <div class="right">
+          <img src="cellularbars.png" alt="Cellular Signal" />
+          <img src="wifi-black.png" alt="Wi-Fi Status" />
+          <img src="lte.png" alt="LTE Status" style="display: none;" />
+          <img src="battery.100percent.bolt.png" alt="Battery" />
+          <img src="airplane.png" alt="Airplane Status" />
+        </div>
       </div>
+
+      <!-- HEADER -->
+      <div class="header">Settings</div>
+
+      <!-- SEARCH BAR -->
+      <div class="search-container">
+        <input type="text" class="search-bar" placeholder="Search" />
+        <img src="magnifyingglass.png" alt="Search Icon" class="search-icon" />
+        <span class="clear-icon" role="button" aria-label="Clear search input">×</span>
+        <!-- Search Results Dropdown -->
+        <div class="search-results"></div>
+      </div>
+
+      <!-- PROFILE SECTION -->
+      <div class="profile-section">
+        <div class="profile-item" tabindex="0" data-setting-id="apple-id">
+          <div class="profile-avatar">
+            <img src="profile.png" alt="Profile Photo" />
+          </div>
+          <div class="profile-info">
+            <div class="profile-name">John Appleseed</div>
+            <div class="profile-email">Apple ID, iCloud, Media & Purchases</div>
+          </div>
+          <div class="profile-chevron">›</div>
+        </div>
+      </div>
+
+      <!-- CONTENT CONTAINER -->
+      <div class="content-container">
+        <!-- PINNED CONNECTIVITY SECTION -->
+        <div class="pinned-section">
+          <div class="section-header" style="cursor: default;">PINNED</div>
+          <div class="connectivity-controls">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <!-- Collapsible: "Recently Used" -->
+        <div class="section-header" data-collapse-target="#recentlyUsed">
+          Recently Used
+          <span class="collapse-arrow">▼</span>
+        </div>
+        <div class="section" id="recentlyUsed">
+          <!-- Display Brightness Row with Slider -->
+          <div class="section-item" tabindex="0" data-setting-id="display-brightness">
+            <div class="left-content">
+              <div class="item-icon icon-display">
+                <img src="sun.png" alt="Display Brightness Icon" />
+              </div>
+              <div class="item-name">Display Brightness</div>
+            </div>
+            <div class="right-content brightness-controls">
+              <input type="range" class="brightness-range main-brightness-range" min="0" max="100" value="100" />
+            </div>
+          </div>
+          <!-- Wi-Fi Row with Toggle -->
+          <div class="section-item" tabindex="0" data-setting-id="wifi">
+            <div class="left-content">
+              <div class="item-icon icon-wifi">
+                <img src="wifi.png" alt="Wi-Fi icon" />
+              </div>
+              <div class="item-name">Wi‑Fi</div>
+            </div>
+            <div class="right-content">
+              <div class="toggle-switch" role="switch" aria-checked="false"></div>
+            </div>
+          </div>
+          <!-- Bluetooth Row with Toggle -->
+          <div class="section-item" tabindex="0" data-setting-id="bluetooth">
+            <div class="left-content">
+              <div class="item-icon icon-bluetooth">
+                <img src="bluetooth.png" alt="Bluetooth icon" />
+              </div>
+              <div class="item-name">Bluetooth</div>
+           ïs
+
+            </div>
+            <div class="right-content">
+              <div class="toggle-switch" role="switch" aria-checked="false"></div>
+            </div>
+          </div>
+          <!-- Low Power Mode Row -->
+          <div class="section-item" tabindex="0" data-setting-id="low-power-mode">
+            <div class="left-content">
+              <div class="item-icon icon-battery">
+                <img src="battery.100percent.png" alt="Battery icon" />
+              </div>
+              <div class="item-name">Low Power Mode</div>
+            </div>
+            <div class="right-content">
+              <div class="toggle-switch" role="switch" aria-checked="false"></div>
+            </div>
+          </div>
+          <!-- Hotspot Row -->
+          <div class="section-item" tabindex="0" data-setting-id="hotspot">
+            <div class="left-content">
+              <div class="item-icon icon-hotspot">
+                <img src="hotspot.png" alt="Hotspot icon" />
+              </div>
+              <div class="item-name">Hotspot</div>
+            </div>
+            <div class="right-content">
+              <div class="toggle-switch" role="switch" aria-checked="false"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Display & Appearance -->
+        <div class="section-header" data-collapse-target="#displayAppearance">
+          Display & Appearance
+          <span class="collapse-arrow">▼</span>
+        </div>
+        <div class="section" id="displayAppearance">
+          <div class="section-item" tabindex="0" data-setting-id="auto-dim">
+            <div class="left-content">
+              <div class="item-icon icon-display">
+                <img src="wifi.png" style="opacity: 0;" alt="placeholder" />
+                <span style="position:absolute;font-size:14px;opacity:0.9;">⏱️</span>
+              </div>
+              <div class="item-name">Auto-Dim Display</div>
+            </div>
+            <div class="right-content">
+              <div class="toggle-switch active" role="switch" aria-checked="true"></div>
+            </div>
+          </div>
+          <div class="section-item" tabindex="0" data-setting-id="dark-mode">
+            <div class="left-content">
+              <div class="item-icon icon-darkmode">
+                <img src="darkmode.png" alt="Dark Mode icon" />
+              </div>
+              <div class="item-name">Dark Mode</div>
+            </div>
+            <div class="right-content">
+              <span>Auto</span>
+              <span class="chevron">›</span>
+            </div>
+          </div>
+          <div class="section-item" tabindex="0" data-setting-id="text-size">
+            <div class="left-content">
+              <div class="item-icon icon-text">
+                <img src="wifi.png" style="opacity: 0;" alt="placeholder" />
+                <span style="position:absolute;font-size:12px;opacity:0.9;">Aa</span>
+              </div>
+              <div class="item-name">Text Size</div>
+            </div>
+            <div class="right-content">
+              <span class="chevron">›</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Connections -->
+        <div class="section-header" data-collapse-target="#connectionsSection">
+          Connections
+          <span class="collapse-arrow">▼</span>
+        </div>
+        <div class="section" id="connectionsSection">
+          <div class="section-item" tabindex="0" data-setting-id="airplane">
+            <div class="left-content">
+              <div class="item-icon icon-airplane">
+                <img src="airplane.png" alt="Airplane Mode icon" />
+              </div>
+              <div class="item-name">Airplane Mode</div>
+            </div>
+            <div class="right-content">
+              <div class="toggle-switch" role="switch" aria-checked="false"></div>
+            </div>
+          </div>
+          <div class="section-item" tabindex="0" data-setting-id="cellular">
+            <div class="left-content">
+              <div class="item-icon icon-cellular">
+                <img src="antenna.radiowaves.left.and.right.png" alt="Cellular icon" />
+              </div>
+              <div class="item-name">Cellular</div>
+            </div>
+            <div class="right-content">
+              <div class="toggle-switch" role="switch" aria-checked="false"></div>
+            </div>
+          </div>
+          <div class="section-item" tabindex="0" data-setting-id="wifi-connections">
+            <div class="left-content">
+              <div class="item-icon icon-wifi">
+                <img src="wifi.png" alt="Wi-Fi icon" />
+              </div>
+              <div class="item-name">Wi‑Fi</div>
+            </div>
+            <div class="right-content">
+              <span>Home_Network</span>
+              <span class="chevron">›</span>
+            </div>
+          </div>
+          <div class="section-item" tabindex="0" data-setting-id="bluetooth-connections">
+            <div class="left-content">
+              <div class="item-icon icon-bluetooth">
+                <img src="bluetooth.png" alt="Bluetooth icon" />
+              </div>
+              <div class="item-name">Bluetooth</div>
+            </div>
+            <div class="right-content">
+              <span>On</span>
+              <span class="chevron">›</span>
+            </div>
+          </div>
+          <div class="section-item" tabindex="0" data-setting-id="location">
+            <div class="left-content">
+              <div class="item-icon icon-location">
+                <img src="location.png" alt="Location icon" />
+              </div>
+              <div class="item-name">Location</div>
+            </div>
+            <div class="right-content">
+              <div class="toggle-switch" role="switch" aria-checked="false"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- System -->
+        <div class="section-header" data-collapse-target="#systemSection">
+          System
+          <span class="collapse-arrow">▼</span>
+        </div>
+        <div class="section" id="systemSection">
+          <div class="section-item" tabindex="0" data-setting-id="software-update">
+            <div class="left-content">
+              <div class="item-icon icon-update">
+                <img src="software-update.png" alt="Software Update icon" />
+              </div>
+              <div class="item-name">Software Update</div>
+            </div>
+            <div class="right-content">
+              <span>Up to date</span>
+              <span class="chevron">›</span>
+            </div>
+          </div>
+          <div class="section-item" tabindex="0" data-setting-id="battery">
+            <div class="left-content">
+              <div class="item-icon icon-battery">
+                <img src="battery.100percent.bolt.png" alt="Battery icon" />
+              </div>
+              <div class="item-name">Battery</div>
+            </div>
+            <div class="right-content">
+              <span>100%</span>
+              <span class="chevron">›</span>
+            </div>
+          </div>
+          <div class="section-item" tabindex="0" data-setting-id="storage">
+            <div class="left-content">
+              <div class="item-icon icon-storage">
+                <img src="storage.png" alt="Storage icon" />
+              </div>
+              <div class="item-name">Storage</div>
+            </div>
+            <div class="right-content">
+              <span>64.3 GB</span>
+              <span class="chevron">›</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PINNED MODAL -->
+      <div class="pinned-modal" role="dialog" aria-modal="true">
+        <div class="modal-content">
+          <button class="close-button" aria-label="Close">×</button>
+          <h2 class="modal-title">Edit Pinned Settings</h2>
+          <ul class="settings-list"></ul>
+        </div>
+      </div>
+
+      <!-- HOME INDICATOR -->
+      <div class="home-indicator"></div>
     </div>
 
-    <!-- HEADER -->
-    <div class="header">Settings</div>
+    <!-- DESCRIPTION -->
+    <div class="description">
+      <h2>iOS Settings Prototype</h2>
+      <p>This prototype simulates the iOS Settings interface, allowing users to interact with various settings and observe how they affect the device's status and appearance.</p>
+      <h3>Features:</h3>
+      <ul>
 
-    <!-- SEARCH BAR -->
-    <div class="search-container">
-      <input type="text" class="search-bar" placeholder="Search" />
-      <img src="magnifyingglass.png" alt="Search Icon" class="search-icon" />
-      <span class="clear-icon" role="button" aria-label="Clear search input">×</span>
-      <!-- Search Results Dropdown -->
-      <div class="search-results"></div>
+        <li><strong>Dynamic Search Bar</strong>: Search for settings by name or keywords. Results are highlighted and can be directly interacted with (e.g., toggling switches or adjusting sliders).</li>
+        <li><strong>Pinned Settings</strong>: Quick access to frequently used settings. Long-press to edit which settings are pinned.</li>
+        <li><strong>Collapsible Sections</strong>: Organize settings into categories like "Recently Used", "Display & Appearance", "Connections", and "System". Click headers to collapse/expand.</li>
+        <li><strong>Interactive Settings (in Search Bar)</strong>:
+          <ul>
+            <li>Toggle switches for settings like Wi-Fi, Bluetooth, Airplane Mode, etc.</li>
+            <li>Brightness slider to adjust screen brightness.</li>
+            <li>Text size adjustment (in search results).</li>
+          </ul>
+        </li>
+     </ul>
+
+      </ul>
     </div>
-
-    <!-- PROFILE SECTION -->
-    <div class="profile-section">
-      <div class="profile-item" tabindex="0" data-setting-id="apple-id">
-        <div class="profile-avatar">
-          <img src="profile.png" alt="Profile Photo" />
-        </div>
-        <div class="profile-info">
-          <div class="profile-name">John Appleseed</div>
-          <div class="profile-email">Apple ID, iCloud, Media & Purchases</div>
-        </div>
-        <div class="profile-chevron">›</div>
-      </div>
-    </div>
-
-    <!-- CONTENT CONTAINER -->
-    <div class="content-container">
-      <!-- PINNED CONNECTIVITY SECTION -->
-      <div class="pinned-section">
-        <div class="section-header" style="cursor: default;">PINNED</div>
-        <div class="connectivity-controls">
-          <!-- Dynamically populated -->
-        </div>
-      </div>
-
-      <!-- Collapsible: "Recently Used" -->
-      <div class="section-header" data-collapse-target="#recentlyUsed">
-        Recently Used
-        <span class="collapse-arrow">▼</span>
-      </div>
-      <div class="section" id="recentlyUsed">
-        <!-- Display Brightness Row with Slider -->
-        <div class="section-item" tabindex="0" data-setting-id="display-brightness">
-          <div class="left-content">
-            <div class="item-icon icon-display">
-              <img src="sun.png" alt="Display Brightness Icon" />
-            </div>
-            <div class="item-name">Display Brightness</div>
-          </div>
-          <div class="right-content brightness-controls">
-            <input type="range" class="brightness-range main-brightness-range" min="0" max="100" value="100" />
-          </div>
-        </div>
-        <!-- Wi-Fi Row with Toggle -->
-        <div class="section-item" tabindex="0" data-setting-id="wifi">
-          <div class="left-content">
-            <div class="item-icon icon-wifi">
-              <img src="wifi.png" alt="Wi-Fi icon" />
-            </div>
-            <div class="item-name">Wi‑Fi</div>
-          </div>
-          <div class="right-content">
-            <div class="toggle-switch" role="switch" aria-checked="false"></div>
-          </div>
-        </div>
-        <!-- Bluetooth Row with Toggle -->
-        <div class="section-item" tabindex="0" data-setting-id="bluetooth">
-          <div class="left-content">
-            <div class="item-icon icon-bluetooth">
-              <img src="bluetooth.png" alt="Bluetooth icon" />
-            </div>
-            <div class="item-name">Bluetooth</div>
-          </div>
-          <div class="right-content">
-            <div class="toggle-switch" role="switch" aria-checked="false"></div>
-          </div>
-        </div>
-        <!-- Low Power Mode Row -->
-        <div class="section-item" tabindex="0" data-setting-id="low-power-mode">
-          <div class="left-content">
-            <div class="item-icon icon-battery">
-              <img src="battery.100percent.png" alt="Battery icon" />
-            </div>
-            <div class="item-name">Low Power Mode</div>
-          </div>
-          <div class="right-content">
-            <div class="toggle-switch" role="switch" aria-checked="false"></div>
-          </div>
-        </div>
-        <!-- Hotspot Row -->
-        <div class="section-item" tabindex="0" data-setting-id="hotspot">
-          <div class="left-content">
-            <div class="item-icon icon-hotspot">
-              <img src="hotspot.png" alt="Hotspot icon" />
-            </div>
-            <div class="item-name">Hotspot</div>
-          </div>
-          <div class="right-content">
-            <div class="toggle-switch" role="switch" aria-checked="false"></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Display & Appearance -->
-      <div class="section-header" data-collapse-target="#displayAppearance">
-        Display & Appearance
-        <span class="collapse-arrow">▼</span>
-      </div>
-      <div class="section" id="displayAppearance">
-        <div class="section-item" tabindex="0" data-setting-id="auto-dim">
-          <div class="left-content">
-            <div class="item-icon icon-display">
-              <img src="wifi.png" style="opacity: 0;" alt="placeholder" />
-              <span style="position:absolute;font-size:14px;opacity:0.9;">⏱️</span>
-            </div>
-            <div class="item-name">Auto-Dim Display</div>
-          </div>
-          <div class="right-content">
-            <div class="toggle-switch active" role="switch" aria-checked="true"></div>
-          </div>
-        </div>
-        <div class="section-item" tabindex="0" data-setting-id="dark-mode">
-          <div class="left-content">
-            <div class="item-icon icon-darkmode">
-              <img src="darkmode.png" alt="Dark Mode icon" />
-            </div>
-            <div class="item-name">Dark Mode</div>
-          </div>
-          <div class="right-content">
-            <span>Auto</span>
-            <span class="chevron">›</span>
-          </div>
-        </div>
-        <div class="section-item" tabindex="0" data-setting-id="text-size">
-          <div class="left-content">
-            <div class="item-icon icon-text">
-              <img src="wifi.png" style="opacity: 0;" alt="placeholder" />
-              <span style="position:absolute;font-size:12px;opacity:0.9;">Aa</span>
-            </div>
-            <div class="item-name">Text Size</div>
-          </div>
-          <div class="right-content">
-            <span class="chevron">›</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Connections -->
-      <div class="section-header" data-collapse-target="#connectionsSection">
-        Connections
-        <span class="collapse-arrow">▼</span>
-      </div>
-      <div class="section" id="connectionsSection">
-        <div class="section-item" tabindex="0" data-setting-id="airplane">
-          <div class="left-content">
-            <div class="item-icon icon-airplane">
-              <img src="airplane.png" alt="Airplane Mode icon" />
-            </div>
-            <div class="item-name">Airplane Mode</div>
-          </div>
-          <div class="right-content">
-            <div class="toggle-switch" role="switch" aria-checked="false"></div>
-          </div>
-        </div>
-        <div class="section-item" tabindex="0" data-setting-id="cellular">
-          <div class="left-content">
-            <div class="item-icon icon-cellular">
-              <img src="antenna.radiowaves.left.and.right.png" alt="Cellular icon" />
-            </div>
-            <div class="item-name">Cellular</div>
-          </div>
-          <div class="right-content">
-            <div class="toggle-switch" role="switch" aria-checked="false"></div>
-          </div>
-        </div>
-        <div class="section-item" tabindex="0" data-setting-id="wifi-connections">
-          <div class="left-content">
-            <div class="item-icon icon-wifi">
-              <img src="wifi.png" alt="Wi-Fi icon" />
-            </div>
-            <div class="item-name">Wi‑Fi</div>
-          </div>
-          <div class="right-content">
-            <span>Home_Network</span>
-            <span class="chevron">›</span>
-          </div>
-        </div>
-        <div class="section-item" tabindex="0" data-setting-id="bluetooth-connections">
-          <div class="left-content">
-            <div class="item-icon icon-bluetooth">
-              <img src="bluetooth.png" alt="Bluetooth icon" />
-            </div>
-            <div class="item-name">Bluetooth</div>
-          </div>
-          <div class="right-content">
-            <span>On</span>
-            <span class="chevron">›</span>
-          </div>
-        </div>
-        <div class="section-item" tabindex="0" data-setting-id="location">
-          <div class="left-content">
-            <div class="item-icon icon-location">
-              <img src="location.png" alt="Location icon" />
-            </div>
-            <div class="item-name">Location</div>
-          </div>
-          <div class="right-content">
-            <div class="toggle-switch" role="switch" aria-checked="false"></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- System -->
-      <div class="section-header" data-collapse-target="#systemSection">
-        System
-        <span class="collapse-arrow">▼</span>
-      </div>
-      <div class="section" id="systemSection">
-        <div class="section-item" tabindex="0" data-setting-id="software-update">
-          <div class="left-content">
-            <div class="item-icon icon-update">
-              <img src="software-update.png" alt="Software Update icon" />
-            </div>
-            <div class="item-name">Software Update</div>
-          </div>
-          <div class="right-content">
-            <span>Up to date</span>
-            <span class="chevron">›</span>
-          </div>
-        </div>
-        <div class="section-item" tabindex="0" data-setting-id="battery">
-          <div class="left-content">
-            <div class="item-icon icon-battery">
-              <img src="battery.100percent.bolt.png" alt="Battery icon" />
-            </div>
-            <div class="item-name">Battery</div>
-          </div>
-          <div class="right-content">
-            <span>100%</span>
-            <span class="chevron">›</span>
-          </div>
-        </div>
-        <div class="section-item" tabindex="0" data-setting-id="storage">
-          <div class="left-content">
-            <div class="item-icon icon-storage">
-              <img src="storage.png" alt="Storage icon" />
-            </div>
-            <div class="item-name">Storage</div>
-          </div>
-          <div class="right-content">
-            <span>64.3 GB</span>
-            <span class="chevron">›</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- PINNED MODAL -->
-    <div class="pinned-modal" role="dialog" aria-modal="true">
-      <div class="modal-content">
-        <button class="close-button" aria-label="Close">×</button>
-        <h2 class="modal-title">Edit Pinned Settings</h2>
-        <ul class="settings-list"></ul>
-      </div>
-    </div>
-
-    <!-- HOME INDICATOR -->
-    <div class="home-indicator"></div>
   </div>
 
   <script>
