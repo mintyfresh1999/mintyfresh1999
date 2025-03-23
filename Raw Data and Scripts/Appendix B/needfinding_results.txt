@@ -1,0 +1,239 @@
+Question: Select your age:
+
+Response Frequencies:
+  18 - 29: 18 responses (69.2%)
+  30 - 39: 7 responses (26.9%)
+  Under 18: 1 responses (3.8%)
+
+Numeric Summary:
+  Mean: 21.36
+  Median: 18.00
+  Std Dev: 5.39
+  Min: 18
+  Max: 30
+
+--------------------------------------------------
+
+Question: Frequency of using the iOS Settings app
+
+Response Frequencies:
+  4 (Monthly): 4 responses (15.4%)
+  1 (Daily): 4 responses (15.4%)
+  3 (Weekly): 12 responses (46.2%)
+  2 (Several times a week): 5 responses (19.2%)
+  5 (Rarely): 1 responses (3.8%)
+
+Numeric Summary:
+  Mean: 2.73
+  Median: 3.00
+  Std Dev: 1.02
+  Min: 1
+  Max: 5
+
+--------------------------------------------------
+
+Question: On a scale from 1 (very dissatisfied) to 5 (very satisfied), how would you rate your current experience navigating the iOS Settings app?
+
+Response Frequencies:
+  5 (Very Satisfied): 4 responses (15.4%)
+  3 (Neutral): 11 responses (42.3%)
+  2 (Dissatisfied): 7 responses (26.9%)
+  4 (Satisfied): 3 responses (11.5%)
+  1 (Very Dissatisfied): 1 responses (3.8%)
+
+Numeric Summary:
+  Mean: 3.08
+  Median: 3.00
+  Std Dev: 1.07
+  Min: 1
+  Max: 5
+
+--------------------------------------------------
+
+Question: What specific aspects of the current navigation do you find most frustrating?
+
+Response Frequencies:
+  N/A: 3 responses (11.5%)
+  Nothing: 1 responses (3.8%)
+  too many categories under one option: 1 responses (3.8%)
+  Hard to navigate through the app to find different settings. Search bar does not always work: 1 responses (3.8%)
+  Clutter: 1 responses (3.8%)
+  I think finding settings without searching is a little annoying. It basically makes the search featured needed instead of being additional: 1 responses (3.8%)
+  The sections grouped together are not always related, and there are too many choices at the settings homepage: 1 responses (3.8%)
+  the search function doesn't work that well : 1 responses (3.8%)
+  none i can think of: 1 responses (3.8%)
+  The search function is really bad: 1 responses (3.8%)
+  it changes a bit with different ios versions: 1 responses (3.8%)
+  Some settings are really hard to find or I don't know what they mean or do: 1 responses (3.8%)
+  I HIGHLY dislike how all categories exist at the top-level within a single menu instead of having logical groups.: 1 responses (3.8%)
+  I feel the search bar isn't the most helpful when trying to find specific features: 1 responses (3.8%)
+  finding certain settings: 1 responses (3.8%)
+  Searching for keywords. : 1 responses (3.8%)
+  it's hard to find what i'm looking for, "general" has too many things under it : 1 responses (3.8%)
+  incorrectness: 1 responses (3.8%)
+  The categories are too general and I cannot intuitively know which settings category a specific setting I want to change falls under.: 1 responses (3.8%)
+  Unable to find specific settings. : 1 responses (3.8%)
+  not being able to find the right menu + notifications: 1 responses (3.8%)
+   : 1 responses (3.8%)
+  It's very user friendly: 1 responses (3.8%)
+  Currently, I find having to access certain areas within settings routinely is most frustrating. Not only settings app refresh after certain time, but also the find function within settings app does not allow me to achieve what I want continuously. : 1 responses (3.8%)
+
+--------------------------------------------------
+
+Question: How easy is it to locate specific settings?
+
+Response Frequencies:
+  3 (Neutral): 12 responses (46.2%)
+  1 (Very Easy): 2 responses (7.7%)
+  4 (Difficult): 7 responses (26.9%)
+  2 (Easy): 3 responses (11.5%)
+  5 (Very Difficult): 2 responses (7.7%)
+
+Numeric Summary:
+  Mean: 3.15
+  Median: 3.00
+  Std Dev: 0.99
+  Min: 1
+  Max: 5
+
+--------------------------------------------------
+
+Question: Have you ever felt overwhelmed by the number of options or the structure of the menu?
+
+Response Frequencies:
+  No: 14 responses (53.8%)
+  Yes: 12 responses (46.2%)
+
+--------------------------------------------------
+
+Question: If you answered “Yes” above, please briefly describe the situation.
+
+Response Frequencies:
+  N/A: 9 responses (34.6%)
+  NA: 2 responses (7.7%)
+  couldn't find a certain setting i wanted: 1 responses (3.8%)
+  n/a: 1 responses (3.8%)
+  I always struggle to find where exactly each setting is, even if I used it before. I almost always need to use the search feature.: 1 responses (3.8%)
+  They need to categorize it better. It's just a long list : 1 responses (3.8%)
+  no: 1 responses (3.8%)
+  Too much to sort through: 1 responses (3.8%)
+  i don't like that sometimes I can find things in the general settings and sometimes I have to specifically look in individual app settings: 1 responses (3.8%)
+  Even if I search for a setting related to for example "Photos" there are so many options that are available it makes me confused.: 1 responses (3.8%)
+  All settings exist at the top-level, which makes it overwhelming when doom-scrolling through the list to find the target setting group.: 1 responses (3.8%)
+  Theres a wide range of categories and subcategories and the search bar isnt the best at filtering: 1 responses (3.8%)
+  I often use the search bar to find what I want, otherwise I won't find it: 1 responses (3.8%)
+  I can't find many things like icloud details under the icloud section or storage details, etc. I think it's way too hard to find a password now: 1 responses (3.8%)
+  Too many options with too few descriptions. : 1 responses (3.8%)
+  I don't know where things are and they frequently change : 1 responses (3.8%)
+  Not applicable: 1 responses (3.8%)
+
+--------------------------------------------------
+
+Question: Which of the following features would most improve your navigation experience?
+
+Response Frequencies:
+  A dynamic search bar that filters settings as you type: 15 responses (57.7%)
+  A reorganized category structure (e.g., grouping settings by usage frequency or function): 8 responses (30.8%)
+  A collapsible menu that shows only top-level categories by default: 3 responses (11.5%)
+
+--------------------------------------------------
+
+Question: If you selected “Other” in the previous question, please specify:
+
+Response Frequencies:
+  N/A: 14 responses (53.8%)
+  NA: 2 responses (7.7%)
+  n/a: 6 responses (23.1%)
+  .: 1 responses (3.8%)
+  na: 1 responses (3.8%)
+  Didn't select "other": 1 responses (3.8%)
+  Not applicable: 1 responses (3.8%)
+
+--------------------------------------------------
+
+Question: For each of the following improvements, please indicate its importance to you using the scale where 1 = Not Important and 5 = Very Important.
+
+Response Frequencies:
+  : 26 responses (100.0%)
+
+--------------------------------------------------
+
+Question: Improved categorization/grouping:
+
+Response Frequencies:
+  2 (Low Priority): 6 responses (23.1%)
+  1 (Unnecessary): 1 responses (3.8%)
+  4 (Useful): 8 responses (30.8%)
+  5 (Essential): 8 responses (30.8%)
+  3 (Neutral): 3 responses (11.5%)
+
+Numeric Summary:
+  Mean: 3.62
+  Median: 4.00
+  Std Dev: 1.24
+  Min: 1
+  Max: 5
+
+--------------------------------------------------
+
+Question: Enhanced search/filter functionality:
+
+Response Frequencies:
+  2 (Low Priority): 1 responses (3.8%)
+  4 (Useful): 6 responses (23.1%)
+  5 (Essential): 11 responses (42.3%)
+  1 (Unnecessary): 2 responses (7.7%)
+  3 (Neutral): 6 responses (23.1%)
+
+Numeric Summary:
+  Mean: 3.88
+  Median: 4.00
+  Std Dev: 1.22
+  Min: 1
+  Max: 5
+
+--------------------------------------------------
+
+Question: Simplified menu layout (e.g., collapsible sections):
+
+Response Frequencies:
+  4 (Useful): 11 responses (42.3%)
+  5 (Essential): 5 responses (19.2%)
+  3 (Neutral): 6 responses (23.1%)
+  1 (Unnecessary): 1 responses (3.8%)
+  2 (Low Priority): 3 responses (11.5%)
+
+Numeric Summary:
+  Mean: 3.62
+  Median: 4.00
+  Std Dev: 1.04
+  Min: 1
+  Max: 5
+
+--------------------------------------------------
+
+Question: Additional comments or suggestions for improving the navigation in the iOS Settings app:
+
+Response Frequencies:
+  N/A: 7 responses (26.9%)
+  Voice control would be good: 1 responses (3.8%)
+  want to see how apple integrates AI: 1 responses (3.8%)
+  None: 1 responses (3.8%)
+  minimize some of the clutter: 1 responses (3.8%)
+  I just think making the overall structure more discoverable rather than searchable: 1 responses (3.8%)
+  n/a: 2 responses (7.7%)
+  Everything you mentioned would be fantastic : 1 responses (3.8%)
+  none: 1 responses (3.8%)
+  na: 1 responses (3.8%)
+  I think a good search algo is needed: 1 responses (3.8%)
+  Emphasize on search function. : 1 responses (3.8%)
+  NA: 1 responses (3.8%)
+  It would be cool if the search function wasn't strictly a text matching search and could interpret what setting users might be looking for even if the text input doesn't directly map to a specific setting: 1 responses (3.8%)
+  Make settings actionable directly from search. : 1 responses (3.8%)
+  put most frequently updated settings at the top (history): 1 responses (3.8%)
+   : 1 responses (3.8%)
+  Nothing: 1 responses (3.8%)
+  dynamic search function would be great, but additionally it would be great to implement a search bar that can interact with the user. Providing a shortcut that can be saved would be great.: 1 responses (3.8%)
+
+--------------------------------------------------
+
