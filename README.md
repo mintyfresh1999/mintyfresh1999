@@ -28,5 +28,4 @@ This repository contains data and analysis scripts for my CS6750 Individual Proj
 - Qualitative analysis requires manual theme identification (see script comments).
 
 ## Notes
-- Appendix G reports 18 primary responses, but `survey_data.json` has 15 due to incomplete data.
 - See the project PDF for detailed context and results.
