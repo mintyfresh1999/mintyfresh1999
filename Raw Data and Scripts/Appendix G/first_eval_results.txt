@@ -1,0 +1,93 @@
+
+Question: What are your thoughts on directly searching and changing the settings in the drop down menu?
+
+Frequencies:
+  3: 1 (6.7%)
+  4: 3 (20.0%)
+  5: 11 (73.3%)
+
+Stats:
+  Mean: 4.67
+  Median: 5.00
+  Std Dev: 0.60
+
+--------------------------------------------------
+
+Question: How clearly does the dynamic search interface convey its purpose?
+
+Frequencies:
+  3: 2 (13.3%)
+  4: 3 (20.0%)
+  5: 10 (66.7%)
+
+Stats:
+  Mean: 4.53
+  Median: 5.00
+  Std Dev: 0.72
+
+--------------------------------------------------
+
+Question: How do you feel about pinned connectivity icons at the top?
+
+Frequencies:
+  2: 3 (20.0%)
+  3: 3 (20.0%)
+  4: 4 (26.7%)
+  5: 5 (33.3%)
+
+Stats:
+  Mean: 3.73
+  Median: 4.00
+  Std Dev: 1.12
+
+--------------------------------------------------
+
+Question: Are ‚ÄúRecently Used‚Äù toggles helpful?
+
+Frequencies:
+  2: 1 (6.7%)
+  3: 4 (26.7%)
+  4: 5 (33.3%)
+  5: 5 (33.3%)
+
+Stats:
+  Mean: 3.93
+  Median: 4.00
+  Std Dev: 0.93
+
+--------------------------------------------------
+
+Question: How useful would you say this feature in the iOS settings app would be?
+
+Frequencies:
+  2: 1 (6.7%)
+  3: 2 (13.3%)
+  4: 7 (46.7%)
+  5: 5 (33.3%)
+
+Stats:
+  Mean: 4.07
+  Median: 4.00
+  Std Dev: 0.85
+
+--------------------------------------------------
+
+Question: Does collapsing/expanding categories help you find things more easily?
+
+Frequencies:
+  Yes: 13 (86.7%)
+  No: 2 (13.3%)
+
+--------------------------------------------------
+
+Question: Which prototype do you prefer, and why? 1 (dynamic search),2 (pinned/recently used), or 3 (collapsible).
+
+Preferences:
+  Prototype 1: 8 (42.1%)
+  Prototype 2: 8 (42.1%)
+  Prototype 3: 3 (15.8%)
+
+Manual Qualitative Analysis Required for 'Why' Responses:
+  - Review responses for common themes (e.g., speed, ease of use).
+
+--------------------------------------------------
