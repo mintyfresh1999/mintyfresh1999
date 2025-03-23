@@ -2,7 +2,7 @@
 
 # iOS Settings Redesign Project
 
-This repository contains data and analysis scripts for my CS6750 Individual Project, redesigning the iOS Settings app. Files are organized by appendices in the project PDF.
+The Raw Data and Scripts contains data and analysis scripts for my CS6750 Individual Project, redesigning the iOS Settings app. Files are organized by appendices in the project PDF.
 
 ## Directory Structure
 
