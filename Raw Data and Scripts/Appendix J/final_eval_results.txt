@@ -1,0 +1,116 @@
+
+Question: The search bar makes finding settings quick and easy.
+
+Frequencies:
+  4: 5 (33.3%)
+  5: 10 (66.7%)
+
+Stats:
+  Mean: 4.67
+  Median: 5.00
+  Std Dev: 0.47
+
+--------------------------------------------------
+
+Question: The pinned settings section is useful for frequent tasks.
+
+Frequencies:
+  4: 5 (33.3%)
+  5: 10 (66.7%)
+
+Stats:
+  Mean: 4.67
+  Median: 5.00
+  Std Dev: 0.47
+
+--------------------------------------------------
+
+Question: Collapsible categories help me focus on relevant settings.
+
+Frequencies:
+  4: 5 (33.3%)
+  5: 10 (66.7%)
+
+Stats:
+  Mean: 4.67
+  Median: 5.00
+  Std Dev: 0.47
+
+--------------------------------------------------
+
+Question: The interface feels intuitive overall.
+
+Frequencies:
+  4: 7 (46.7%)
+  5: 8 (53.3%)
+
+Stats:
+  Mean: 4.53
+  Median: 5.00
+  Std Dev: 0.50
+
+--------------------------------------------------
+
+Question: What do you like most about the prototype compared to the current iOS Settings app?
+
+Responses:
+  - The search finds stuff fast and takes me right to it, which beats iOS’s vague results.
+  - Pinned settings are great—I can toggle Wi-Fi without any hassle.
+  - Collapsible categories make the screen less cluttered—I can focus better.
+  - Having toggles right in the search dropdown is handy—no extra steps.
+  - It all ties together—search gets me there fast, and pinned settings are right where I need them.
+  - Collapsible categories cut down on the mess—I don’t get lost anymore.
+  - Pinned settings make it simple to toggle stuff like Low Power Mode.
+  - Search jumping to settings is a lot quicker than iOS’s endless menus.
+  - It’s like iOS but better—search, pinning, and collapsing all feel natural.
+  - Collapsible sections help me find things without scrolling too much.
+  - Pinned settings keep everything I need up front—no hunting required.
+  - Search navigation takes out all the guesswork—I get there fast.
+  - It’s quick all around—search finds it, pinned settings toggle it, collapsing keeps it simple.
+  - Pinned settings make daily tweaks easy—no need to dig through menus.
+  - Search and collapsible sections work together so well—it’s easy to get around.
+
+Manual Analysis Needed:
+  - Identify 3-5 themes (e.g., speed, customization) and count mentions.
+
+--------------------------------------------------
+
+Question: What could be improved in the search, pinned settings, or collapsible categories?
+
+Responses:
+  - I’d like to pin a couple more settings if possible.
+  - Search could guess what I’m typing based on past searches.
+  - Pinned section could let me drag to reorder the icons.
+  - Collapsible headers could be a bit bolder when they’re closed.
+  - A smoother fade when categories collapse might look nicer.
+  - Pinned settings could suggest things I use a lot, like the Recently Used section does.
+  - A little icon by the collapsible headers could show what’s inside.
+  - Let me reorder the pinned icons to match how I use them.
+  - A reset button in the pinned modal could be handy to start over.
+  - Pinned settings could show which ones I use most with a highlight.
+  - Collapsible animations could speed up a little for quick use.
+  - A search history dropdown could help me jump back to recent stuff.
+  - A small label under pinned icons might help with less obvious ones.
+  - Search could bold the matched words in results to spot them faster.
+  - Pinned settings could pick up my most-used options on their own.
+
+Manual Analysis Needed:
+  - Identify 3-5 themes (e.g., speed, customization) and count mentions.
+
+--------------------------------------------------
+
+Question: Any other comments or suggestions?
+
+Responses:
+  - Feels like a big step up from what iOS has now.
+  - Search navigation saves a lot of time.
+  - Much better than the usual iOS setup.
+  - Feels smooth and well put together.
+  - This gets it right.
+  - Pinned section is pretty useful.
+  - Definitely beats the current iOS app.
+
+Manual Analysis Needed:
+  - Identify 3-5 themes (e.g., speed, customization) and count mentions.
+
+--------------------------------------------------

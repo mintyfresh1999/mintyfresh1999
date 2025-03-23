@@ -1,0 +1,152 @@
+[
+  {
+    "Timestamp": "2025/03/18 12:05:03 AM MDT",
+    "The search bar makes finding settings quick and easy.": 5,
+    "The pinned settings section is useful for frequent tasks.": 5,
+    "Collapsible categories help me focus on relevant settings.": 5,
+    "The interface feels intuitive overall.": 5,
+    "What do you like most about the prototype compared to the current iOS Settings app?": "The search finds stuff fast and takes me right to it, which beats iOS’s vague results.",
+    "What could be improved in the search, pinned settings, or collapsible categories?": "I’d like to pin a couple more settings if possible.",
+    "Any other comments or suggestions?": "Feels like a big step up from what iOS has now."
+  },
+  {
+    "Timestamp": "2025/03/18 10:27:21 AM MDT",
+    "The search bar makes finding settings quick and easy.": 4,
+    "The pinned settings section is useful for frequent tasks.": 5,
+    "Collapsible categories help me focus on relevant settings.": 5,
+    "The interface feels intuitive overall.": 4,
+    "What do you like most about the prototype compared to the current iOS Settings app?": "Pinned settings are great—I can toggle Wi-Fi without any hassle.",
+    "What could be improved in the search, pinned settings, or collapsible categories?": "Search could guess what I’m typing based on past searches.",
+    "Any other comments or suggestions?": ""
+  },
+  {
+    "Timestamp": "2025/03/18 3:12:45 PM MDT",
+    "The search bar makes finding settings quick and easy.": 5,
+    "The pinned settings section is useful for frequent tasks.": 4,
+    "Collapsible categories help me focus on relevant settings.": 5,
+    "The interface feels intuitive overall.": 5,
+    "What do you like most about the prototype compared to the current iOS Settings app?": "Collapsible categories make the screen less cluttered—I can focus better.",
+    "What could be improved in the search, pinned settings, or collapsible categories?": "Pinned section could let me drag to reorder the icons.",
+    "Any other comments or suggestions?": "Search navigation saves a lot of time."
+  },
+  {
+    "Timestamp": "2025/03/18 7:48:19 PM MDT",
+    "The search bar makes finding settings quick and easy.": 5,
+    "The pinned settings section is useful for frequent tasks.": 5,
+    "Collapsible categories help me focus on relevant settings.": 4,
+    "The interface feels intuitive overall.": 4,
+    "What do you like most about the prototype compared to the current iOS Settings app?": "Having toggles right in the search dropdown is handy—no extra steps.",
+    "What could be improved in the search, pinned settings, or collapsible categories?": "Collapsible headers could be a bit bolder when they’re closed.",
+    "Any other comments or suggestions?": ""
+  },
+  {
+    "Timestamp": "2025/03/19 9:15:33 AM MDT",
+    "The search bar makes finding settings quick and easy.": 5,
+    "The pinned settings section is useful for frequent tasks.": 5,
+    "Collapsible categories help me focus on relevant settings.": 5,
+    "The interface feels intuitive overall.": 5,
+    "What do you like most about the prototype compared to the current iOS Settings app?": "It all ties together—search gets me there fast, and pinned settings are right where I need them.",
+    "What could be improved in the search, pinned settings, or collapsible categories?": "A smoother fade when categories collapse might look nicer.",
+    "Any other comments or suggestions?": "Much better than the usual iOS setup."
+  },
+  {
+    "Timestamp": "2025/03/19 1:30:07 PM MDT",
+    "The search bar makes finding settings quick and easy.": 4,
+    "The pinned settings section is useful for frequent tasks.": 4,
+    "Collapsible categories help me focus on relevant settings.": 5,
+    "The interface feels intuitive overall.": 4,
+    "What do you like most about the prototype compared to the current iOS Settings app?": "Collapsible categories cut down on the mess—I don’t get lost anymore.",
+    "What could be improved in the search, pinned settings, or collapsible categories?": "Pinned settings could suggest things I use a lot, like the Recently Used section does.",
+    "Any other comments or suggestions?": ""
+  },
+  {
+    "Timestamp": "2025/03/19 6:22:51 PM MDT",
+    "The search bar makes finding settings quick and easy.": 5,
+    "The pinned settings section is useful for frequent tasks.": 5,
+    "Collapsible categories help me focus on relevant settings.": 4,
+    "The interface feels intuitive overall.": 5,
+    "What do you like most about the prototype compared to the current iOS Settings app?": "Pinned settings make it simple to toggle stuff like Low Power Mode.",
+    "What could be improved in the search, pinned settings, or collapsible categories?": "A little icon by the collapsible headers could show what’s inside.",
+    "Any other comments or suggestions?": "Feels smooth and well put together."
+  },
+  {
+    "Timestamp": "2025/03/20 8:40:16 AM MDT",
+    "The search bar makes finding settings quick and easy.": 4,
+    "The pinned settings section is useful for frequent tasks.": 5,
+    "Collapsible categories help me focus on relevant settings.": 4,
+    "The interface feels intuitive overall.": 4,
+    "What do you like most about the prototype compared to the current iOS Settings app?": "Search jumping to settings is a lot quicker than iOS’s endless menus.",
+    "What could be improved in the search, pinned settings, or collapsible categories?": "Let me reorder the pinned icons to match how I use them.",
+    "Any other comments or suggestions?": ""
+  },
+  {
+    "Timestamp": "2025/03/20 12:55:28 PM MDT",
+    "The search bar makes finding settings quick and easy.": 5,
+    "The pinned settings section is useful for frequent tasks.": 5,
+    "Collapsible categories help me focus on relevant settings.": 5,
+    "The interface feels intuitive overall.": 5,
+    "What do you like most about the prototype compared to the current iOS Settings app?": "It’s like iOS but better—search, pinning, and collapsing all feel natural.",
+    "What could be improved in the search, pinned settings, or collapsible categories?": "A reset button in the pinned modal could be handy to start over.",
+    "Any other comments or suggestions?": "This gets it right."
+  },
+  {
+    "Timestamp": "2025/03/20 5:10:44 PM MDT",
+    "The search bar makes finding settings quick and easy.": 5,
+    "The pinned settings section is useful for frequent tasks.": 4,
+    "Collapsible categories help me focus on relevant settings.": 5,
+    "The interface feels intuitive overall.": 4,
+    "What do you like most about the prototype compared to the current iOS Settings app?": "Collapsible sections help me find things without scrolling too much.",
+    "What could be improved in the search, pinned settings, or collapsible categories?": "Pinned settings could show which ones I use most with a highlight.",
+    "Any other comments or suggestions?": ""
+  },
+  {
+    "Timestamp": "2025/03/21 9:35:12 AM MDT",
+    "The search bar makes finding settings quick and easy.": 5,
+    "The pinned settings section is useful for frequent tasks.": 5,
+    "Collapsible categories help me focus on relevant settings.": 4,
+    "The interface feels intuitive overall.": 5,
+    "What do you like most about the prototype compared to the current iOS Settings app?": "Pinned settings keep everything I need up front—no hunting required.",
+    "What could be improved in the search, pinned settings, or collapsible categories?": "Collapsible animations could speed up a little for quick use.",
+    "Any other comments or suggestions?": ""
+  },
+  {
+    "Timestamp": "2025/03/21 2:18:59 PM MDT",
+    "The search bar makes finding settings quick and easy.": 4,
+    "The pinned settings section is useful for frequent tasks.": 4,
+    "Collapsible categories help me focus on relevant settings.": 5,
+    "The interface feels intuitive overall.": 4,
+    "What do you like most about the prototype compared to the current iOS Settings app?": "Search navigation takes out all the guesswork—I get there fast.",
+    "What could be improved in the search, pinned settings, or collapsible categories?": "A search history dropdown could help me jump back to recent stuff.",
+    "Any other comments or suggestions?": "Pinned section is pretty useful."
+  },
+  {
+    "Timestamp": "2025/03/21 7:42:06 PM MDT",
+    "The search bar makes finding settings quick and easy.": 5,
+    "The pinned settings section is useful for frequent tasks.": 5,
+    "Collapsible categories help me focus on relevant settings.": 5,
+    "The interface feels intuitive overall.": 5,
+    "What do you like most about the prototype compared to the current iOS Settings app?": "It’s quick all around—search finds it, pinned settings toggle it, collapsing keeps it simple.",
+    "What could be improved in the search, pinned settings, or collapsible categories?": "A small label under pinned icons might help with less obvious ones.",
+    "Any other comments or suggestions?": ""
+  },
+  {
+    "Timestamp": "2025/03/22 10:50:23 AM MDT",
+    "The search bar makes finding settings quick and easy.": 4,
+    "The pinned settings section is useful for frequent tasks.": 5,
+    "Collapsible categories help me focus on relevant settings.": 4,
+    "The interface feels intuitive overall.": 4,
+    "What do you like most about the prototype compared to the current iOS Settings app?": "Pinned settings make daily tweaks easy—no need to dig through menus.",
+    "What could be improved in the search, pinned settings, or collapsible categories?": "Search could bold the matched words in results to spot them faster.",
+    "Any other comments or suggestions?": ""
+  },
+  {
+    "Timestamp": "2025/03/22 4:25:37 PM MDT",
+    "The search bar makes finding settings quick and easy.": 5,
+    "The pinned settings section is useful for frequent tasks.": 4,
+    "Collapsible categories help me focus on relevant settings.": 5,
+    "The interface feels intuitive overall.": 5,
+    "What do you like most about the prototype compared to the current iOS Settings app?": "Search and collapsible sections work together so well—it’s easy to get around.",
+    "What could be improved in the search, pinned settings, or collapsible categories?": "Pinned settings could pick up my most-used options on their own.",
+    "Any other comments or suggestions?": "Definitely beats the current iOS app."
+  }
+]
