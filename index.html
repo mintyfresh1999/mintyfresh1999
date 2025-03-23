@@ -33,19 +33,17 @@
       scroll-behavior: smooth;
     }
     
-    
-
-.container {
-  max-width: 390px;
-  min-height: 100vh;
-  margin: 0 auto 20px; /* Updated */
-  background-color: #f2f2f7;
-  position: relative;
-  border: 2px solid #aaa;
-  border-radius: 40px;
-  overflow: hidden;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-}
+    .container {
+      max-width: 390px;
+      min-height: 100vh;
+      margin: 0 auto 20px;
+      background-color: #f2f2f7;
+      position: relative;
+      border: 2px solid #aaa;
+      border-radius: 40px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    }
 
     .flex-container {
       display: flex;
@@ -65,16 +63,14 @@
       font-family: 'SF Pro Text', -apple-system, system-ui, sans-serif;
       color: #1c1c1e;
       position: sticky;
-      top: 20px; /* Distance from top when sticky */
-      height: fit-content; /* Adjust height to content */
-      max-height: calc(100vh - 40px); /* Maximum height with padding */
-      overflow-y: auto; /* Enable scrolling if content is too long */
-      /* Improve scrolling performance */
+      top: 20px;
+      height: fit-content;
+      max-height: calc(100vh - 40px);
+      overflow-y: auto;
       will-change: transform;
       -webkit-overflow-scrolling: touch;
     }
 
-    /* Add smooth scrollbar styling */
     .description::-webkit-scrollbar {
       width: 8px;
     }
@@ -461,6 +457,25 @@
     .settings-list input[type="checkbox"] {
       width: 24px; height: 24px; accent-color: #007aff;
     }
+    .modal-actions {
+      display: flex;
+      justify-content: center;
+      padding: 10px 20px 0;
+    }
+    .save-button {
+      background-color: #007aff;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 20px;
+      font-size: 17px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+    .save-button:hover {
+      background-color: #005ecb;
+    }
 
     /* HOME INDICATOR */
     .home-indicator {
@@ -470,49 +485,26 @@
     }
 
     /* NEW STYLES FOR DESCRIPTION */
-    .flex-container {
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      gap: 20px;
-      padding: 20px;
-      flex-wrap: wrap;
-    }
-
-    .description {
-      max-width: 400px;
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-      font-family: 'SF Pro Text', -apple-system, system-ui, sans-serif;
-      color: #1c1c1e;
-    }
-
     .description h2 {
       font-family: 'SF Pro Display', -apple-system, system-ui, sans-serif;
       font-size: 24px;
       font-weight: 600;
       margin-bottom: 10px;
     }
-
     .description h3 {
       font-size: 18px;
       font-weight: 600;
       margin-top: 15px;
       margin-bottom: 5px;
     }
-
     .description p, .description ul {
       font-size: 16px;
       line-height: 1.5;
     }
-
     .description ul {
       list-style-type: disc;
       padding-left: 20px;
     }
-
     .description li {
       margin-bottom: 5px;
     }
@@ -609,8 +601,6 @@
                 <img src="bluetooth.png" alt="Bluetooth icon" />
               </div>
               <div class="item-name">Bluetooth</div>
-
-
             </div>
             <div class="right-content">
               <div class="toggle-switch" role="switch" aria-checked="false"></div>
@@ -802,6 +792,9 @@
           <button class="close-button" aria-label="Close">×</button>
           <h2 class="modal-title">Edit Pinned Settings</h2>
           <ul class="settings-list"></ul>
+          <div class="modal-actions">
+            <button class="save-button" aria-label="Save pinned settings">Save</button>
+          </div>
         </div>
       </div>
 
@@ -815,9 +808,8 @@
       <p>This prototype simulates the iOS Settings interface, allowing users to interact with various settings and observe how they affect the device's status and appearance.</p>
       <h3>Features:</h3>
       <ul>
-
         <li><strong>Dynamic Search Bar</strong>: Search for settings by name or keywords. Results are highlighted and can be directly interacted with (e.g., toggling switches or adjusting sliders).</li>
-        <li><strong>Pinned Settings</strong>: Quick access to frequently used settings. Long-press to edit which settings are pinned.</li>
+        <li><strong>Pinned Settings</strong>: Quick access to frequently used settings. Long-press to edit which settings are pinned, with a Save button to confirm changes.</li>
         <li><strong>Collapsible Sections</strong>: Organize settings into categories like "Recently Used", "Display & Appearance", "Connections", and "System". Click headers to collapse/expand.</li>
         <li><strong>Interactive Settings (in Search Bar)</strong>:
           <ul>
@@ -826,8 +818,6 @@
             <li>Text size adjustment (in search results).</li>
           </ul>
         </li>
-     </ul>
-
       </ul>
     </div>
   </div>
@@ -981,9 +971,11 @@
     const pinnedModal    = document.querySelector('.pinned-modal');
     const settingsList   = pinnedModal.querySelector('.settings-list');
     const closeButton    = pinnedModal.querySelector('.close-button');
+    const saveButton     = pinnedModal.querySelector('.save-button');
 
     /* Initial pinned settings */
     let pinnedSettings = ["wifi", "bluetooth", "airplane", "cellular", "software-update", "text-size", "storage", "dark-mode"];
+    let tempPinnedSettings = [...pinnedSettings]; // Temporary array for modal changes
 
     function renderPinnedSection() {
       const pinnedContainer = document.querySelector('.connectivity-controls');
@@ -1024,35 +1016,31 @@
       });
       attachPinnedButtonListeners();
     }
-    
-    // Add debouncing for search input
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
+
+    function debounce(func, wait) {
+      let timeout;
+      return function executedFunction(...args) {
         const later = () => {
-            clearTimeout(timeout);
-            func(...args);
+          clearTimeout(timeout);
+          func(...args);
         };
         clearTimeout(timeout);
         timeout = setTimeout(later, wait);
-    };
-}
+      };
+    }
 
-// Use Intersection Observer for lazy loading sections
-const sectionObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
         if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            sectionObserver.unobserve(entry.target);
+          entry.target.classList.add('visible');
+          sectionObserver.unobserve(entry.target);
         }
-    });
-}, {
-    threshold: 0.1
-});
+      });
+    }, { threshold: 0.1 });
 
-document.querySelectorAll('.section').forEach(section => {
-    sectionObserver.observe(section);
-});
+    document.querySelectorAll('.section').forEach(section => {
+      sectionObserver.observe(section);
+    });
 
     function attachPinnedButtonListeners() {
       document.querySelectorAll('.connectivity-button').forEach(button => {
@@ -1386,6 +1374,7 @@ document.querySelectorAll('.section').forEach(section => {
 
     /* Pinned Modal Functions */
     function openPinnedModal() {
+      tempPinnedSettings = [...pinnedSettings]; // Clone current pinned settings
       const list = settingsList;
       list.innerHTML = '';
       const pinnableSettings = settingsItems.sort((a, b) => a.name.localeCompare(b.name));
@@ -1395,7 +1384,7 @@ document.querySelectorAll('.section').forEach(section => {
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
         checkbox.setAttribute('data-setting-id', setting.id);
-        checkbox.checked = pinnedSettings.includes(setting.id);
+        checkbox.checked = tempPinnedSettings.includes(setting.id);
         label.textContent = setting.name;
         li.appendChild(label);
         li.appendChild(checkbox);
@@ -1407,31 +1396,35 @@ document.querySelectorAll('.section').forEach(section => {
             checkbox.dispatchEvent(new Event('change'));
           }
         });
+
+        checkbox.addEventListener('change', function() {
+          const settingId = this.getAttribute('data-setting-id');
+          if (this.checked) {
+            if (!tempPinnedSettings.includes(settingId)) tempPinnedSettings.push(settingId);
+          } else {
+            tempPinnedSettings = tempPinnedSettings.filter(id => id !== settingId);
+          }
+        });
       });
       pinnedModal.classList.add('active');
     }
 
-    function closePinnedModal() {
+    function savePinnedSettings() {
+      pinnedSettings = [...tempPinnedSettings]; // Apply changes only on save
       pinnedModal.classList.remove('active');
       renderPinnedSection();
+    }
+
+    function closePinnedModal() {
+      pinnedModal.classList.remove('active');
+      // No changes applied unless saved
     }
 
     pinnedModal.addEventListener('click', function(e) {
       if (e.target === this) closePinnedModal();
     });
     closeButton.addEventListener('click', closePinnedModal);
-
-    settingsList.addEventListener('change', function(e) {
-      if (e.target.type === 'checkbox') {
-        const settingId = e.target.getAttribute('data-setting-id');
-        if (e.target.checked) {
-          if (!pinnedSettings.includes(settingId)) pinnedSettings.push(settingId);
-        } else {
-          pinnedSettings = pinnedSettings.filter(id => id !== settingId);
-        }
-        renderPinnedSection();
-      }
-    });
+    saveButton.addEventListener('click', savePinnedSettings);
 
     function turnOnAirplane() {
       ["wifi", "bluetooth", "cellular", "hotspot", "location"].forEach(id => {
@@ -1460,18 +1453,17 @@ document.querySelectorAll('.section').forEach(section => {
       if (airplaneItem) airplaneItem.toggleState = true;
       showAirplaneStatus(true);
     }
-    
-    function updateTime() {
-    const timeElement = document.querySelector('.status-bar .time');
-    const now = new Date();
-    const hours = now.getHours().toString().padStart(2, '0');
-    const minutes = now.getMinutes().toString().padStart(2, '0');
-    timeElement.textContent = `${hours}:${minutes}`;
-}
 
-// Update time every minute
-setInterval(updateTime, 60000);
-updateTime(); // Initial call
+    function updateTime() {
+      const timeElement = document.querySelector('.status-bar .time');
+      const now = new Date();
+      const hours = now.getHours().toString().padStart(2, '0');
+      const minutes = now.getMinutes().toString().padStart(2, '0');
+      timeElement.textContent = `${hours}:${minutes}`;
+    }
+
+    setInterval(updateTime, 60000);
+    updateTime();
 
     function turnOffAirplane() {
       const planeItem = settingsItems.find(s => s.id === "airplane");
