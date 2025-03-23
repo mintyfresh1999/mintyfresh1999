@@ -15,39 +15,39 @@ Stats:
 Question: The pinned settings section is useful for frequent tasks.
 
 Frequencies:
-  4: 5 (33.3%)
-  5: 10 (66.7%)
+  4: 12 (80.0%)
+  5: 3 (20.0%)
 
 Stats:
-  Mean: 4.67
-  Median: 5.00
-  Std Dev: 0.47
+  Mean: 4.20
+  Median: 4.00
+  Std Dev: 0.40
 
 --------------------------------------------------
 
 Question: Collapsible categories help me focus on relevant settings.
 
 Frequencies:
-  4: 5 (33.3%)
-  5: 10 (66.7%)
+  4: 13 (86.7%)
+  5: 2 (13.3%)
 
 Stats:
-  Mean: 4.67
-  Median: 5.00
-  Std Dev: 0.47
+  Mean: 4.13
+  Median: 4.00
+  Std Dev: 0.34
 
 --------------------------------------------------
 
 Question: The interface feels intuitive overall.
 
 Frequencies:
-  4: 7 (46.7%)
-  5: 8 (53.3%)
+  4: 6 (40.0%)
+  5: 9 (60.0%)
 
 Stats:
-  Mean: 4.53
+  Mean: 4.60
   Median: 5.00
-  Std Dev: 0.50
+  Std Dev: 0.49
 
 --------------------------------------------------
 
